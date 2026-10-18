@@ -93,6 +93,16 @@ const DEFAULT_PROJECTS = {
     desc: 'High-retention vertical financial reel crafted for Invesco Mutual Fund. Retention-engineered 3-second hook, minimalist kinetic typography, and fast-paced asset category breakdown designed for vertical mobile feeds.',
     videoUrl: 'https://youtube.com/shorts/U-Ek8qG2-IY'
   },
+  'vrindda-vision-board': {
+    title: 'Stop Making Vision Boards | Do This Instead',
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Personal Growth & Lifestyle • 9:16',
+    client: 'Vrindda Bhatt',
+    role: 'Hook Crafting, Kinetic Typography & Sound Design',
+    desc: 'A high-retention personal development reel crafted for Vrindda Bhatt. Designed with an intrigue-based contrarian hook, Apple-grade kinetic subtitles, crisp visual match cuts, and dynamic sound design that drives high average watch time.',
+    videoUrl: 'https://youtube.com/shorts/0RUhTqSRrz8'
+  },
   'podcast-founders': {
     title: 'The Founder & Creator Journey: Multi-Cam Mastercut',
     category: 'Podcast & Reels',

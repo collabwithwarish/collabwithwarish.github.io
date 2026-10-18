@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v4.4';
+  const DATA_VERSION = 'v4.5';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -379,6 +379,24 @@ const projectsData = {
     ],
     image: 'assets/projects/invesco-categories-reel.jpg',
     videoUrl: 'https://youtube.com/shorts/U-Ek8qG2-IY',
+    startTime: 0
+  },
+  'vrindda-vision-board': {
+    title: 'Stop Making Vision Boards | Do This Instead',
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Personal Growth & Lifestyle • 9:16',
+    client: 'Vrindda Bhatt',
+    role: 'Hook Crafting, Kinetic Typography & Sound Design',
+    desc: 'A high-retention personal development reel crafted for Vrindda Bhatt. Designed with an intrigue-based contrarian hook, Apple-grade kinetic subtitles, crisp visual match cuts, and dynamic sound design that drives high average watch time.',
+    topics: [
+      'Contrarian 3-second hook challenging conventional self-help habits',
+      'Clean, elegant kinetic subtitles with deliberate typographical emphasis',
+      'Rhythmic pacing that sustains viewer focus across the entire takeaway',
+      'Engaging acoustic sound effects and vocal mastering'
+    ],
+    image: 'assets/projects/vrindda-bhatt-vision-board.jpg',
+    videoUrl: 'https://youtube.com/shorts/0RUhTqSRrz8',
     startTime: 0
   },
   'podcast-founders': {
