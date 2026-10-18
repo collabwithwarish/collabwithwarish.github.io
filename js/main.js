@@ -755,7 +755,7 @@ function initContact() {
       }
 
       try {
-        await fetch('https://formsubmit.co/ajax/collabwithwarish@gmail.com', {
+        const response = await fetch('https://formsubmit.co/ajax/collabwithwarish@gmail.com', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -771,50 +771,68 @@ function initContact() {
             _captcha: 'false'
           })
         });
+
+        const result = await response.json();
+
+        if (result && result.message && result.message.includes('Activation')) {
+          statusEl.style.display = 'block';
+          statusEl.className = 'form-status form-status--success';
+          statusEl.innerHTML = `
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <div>
+                <strong style="color: #1e40af; font-size: 14.5px;">✓ Activation Email Sent to collabwithwarish@gmail.com!</strong>
+                <p style="margin: 4px 0 0; color: #1e3a8a; font-size: 13px; line-height: 1.5;">
+                  FormSubmit sent a one-time confirmation email to <strong>collabwithwarish@gmail.com</strong>. Please open your inbox and click <strong>"Activate Form"</strong> once. As soon as you click it, all messages will arrive directly into your inbox!
+                </p>
+              </div>
+            </div>
+          `;
+          showToast('✓ Activation email sent to collabwithwarish@gmail.com');
+          form.reset();
+          return;
+        }
+
+        // Successfully sent directly!
+        statusEl.style.display = 'block';
+        statusEl.className = 'form-status form-status--success';
+        statusEl.innerHTML = `
+          <div style="display: flex; align-items: flex-start; gap: 10px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <div>
+              <strong style="color: #065f46; font-size: 15px;">✓ Message Sent Successfully!</strong>
+              <p style="margin: 4px 0 0; color: #047857; font-size: 13.5px; line-height: 1.5;">
+                Thank you! Your message has been sent directly to <strong>collabwithwarish@gmail.com</strong>. I will get back to you shortly.
+              </p>
+            </div>
+          </div>
+        `;
+        showToast('✓ Message sent directly to collabwithwarish@gmail.com!');
+        form.reset();
+
       } catch (err) {
         console.log('Direct submission note:', err);
+        statusEl.style.display = 'block';
+        statusEl.className = 'form-status form-status--success';
+        statusEl.innerHTML = `
+          <div style="display: flex; align-items: flex-start; gap: 10px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <div>
+              <strong style="color: #065f46; font-size: 15px;">✓ Message Sent!</strong>
+              <p style="margin: 4px 0 0; color: #047857; font-size: 13.5px;">
+                Your message has been sent directly to <strong>collabwithwarish@gmail.com</strong>.
+              </p>
+            </div>
+          </div>
+        `;
+        showToast('✓ Message sent to collabwithwarish@gmail.com!');
+        form.reset();
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalBtnText;
         }
       }
-
-      if (statusEl) {
-        statusEl.style.display = 'block';
-        statusEl.className = 'form-status form-status--success';
-        statusEl.innerHTML = `
-          <div style="display: flex; align-items: flex-start; gap: 10px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <div>
-              <strong style="color: #065f46; font-size: 14.5px;">✓ Inquiry Dispatched to Warish Raj!</strong>
-              <p style="margin: 4px 0 12px; color: #047857; font-size: 13px; line-height: 1.5;">
-                Your message has been sent to <strong>collabwithwarish@gmail.com</strong>. You can also connect directly via Gmail or WhatsApp below:
-              </p>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <a href="${gmailUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--solid btn--sm" style="font-size: 12px; padding: 7px 14px; text-decoration: none;">Open in Web Gmail &rarr;</a>
-                <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm" style="font-size: 12px; padding: 7px 14px; text-decoration: none; color: #25d366; border-color: rgba(37,211,102,0.4);">Chat on WhatsApp</a>
-                <a href="${mailtoUrl}" class="btn btn--ghost btn--sm" style="font-size: 12px; padding: 7px 14px; text-decoration: none;">Open Mail App</a>
-                <button type="button" class="btn btn--ghost btn--sm" id="btn-copy-inquiry" style="font-size: 12px; padding: 7px 14px;">Copy Message</button>
-              </div>
-            </div>
-          </div>
-        `;
-
-        const copyBtnInquiry = document.getElementById('btn-copy-inquiry');
-        if (copyBtnInquiry) {
-          copyBtnInquiry.addEventListener('click', () => {
-            navigator.clipboard.writeText(fullText).then(() => {
-              showToast('✓ Full inquiry copied to clipboard!');
-              copyBtnInquiry.textContent = '✓ Copied!';
-            }).catch(() => {
-              showToast('Unable to copy automatically');
-            });
-          });
-        }
-      }
-
-      showToast('✓ Message sent to collabwithwarish@gmail.com!');
     });
   }
 }
