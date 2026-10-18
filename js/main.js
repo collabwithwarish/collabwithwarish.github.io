@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v4.0';
+  const DATA_VERSION = 'v4.2';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -271,6 +271,24 @@ const projectsData = {
     ],
     image: 'assets/projects/motilal-family-office.jpg',
     videoUrl: 'https://www.youtube.com/watch?v=9J-Zbk6ItEQ',
+    startTime: 0
+  },
+  'icici-market-analysis': {
+    title: 'What Moved Indian Markets? | Ft. Sharmila D’Silva',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Macroeconomic Analysis',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Editorial Story Flow, Data Motion Graphics & Audio Mastering',
+    desc: 'A high-retention macroeconomic analysis breakdown edited for ICICI Prudential Mutual Fund. Dynamic pacing, institutional data graphics, and structured storytelling that breaks down complex equity market catalysts for intelligent investors.',
+    topics: [
+      'Macroeconomic storytelling structured around market-moving triggers',
+      'Institutional data visualizations and clean financial typography',
+      'Deliberate conversational pacing keeping viewers engaged across complex data',
+      'Broadcast-level audio mastering and polished studio sound design'
+    ],
+    image: 'assets/projects/icici-market-analysis.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=qr7FplzumYY',
     startTime: 0
   },
   'finance-funds': {

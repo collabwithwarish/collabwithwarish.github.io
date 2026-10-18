@@ -33,6 +33,16 @@ const DEFAULT_PROJECTS = {
     desc: 'A high-impact wealth management and family office masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
     videoUrl: 'https://www.youtube.com/watch?v=9J-Zbk6ItEQ'
   },
+  'icici-market-analysis': {
+    title: 'What Moved Indian Markets? | Ft. Sharmila D’Silva',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Macroeconomic Analysis',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Editorial Story Flow, Data Motion Graphics & Audio Mastering',
+    desc: 'A high-retention macroeconomic analysis breakdown edited for ICICI Prudential Mutual Fund. Dynamic pacing, institutional data graphics, and structured storytelling that breaks down complex equity market catalysts for intelligent investors.',
+    videoUrl: 'https://www.youtube.com/watch?v=qr7FplzumYY'
+  },
   'finance-funds': {
     title: '3 Things to Avoid When Setting Up a Family Office',
     category: 'YouTube Documentary',
