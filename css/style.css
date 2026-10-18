@@ -1084,11 +1084,9 @@ img, svg, video {
   color: var(--amber-warm);
 }
 
-.work-item__year {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ink-faint);
-  font-weight: 500;
+.work-item__year,
+.lightbox-year {
+  display: none !important;
 }
 
 .work-item__title {

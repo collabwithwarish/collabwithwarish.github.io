@@ -179,7 +179,7 @@ const DEFAULT_SETTINGS = {
   heroSub: 'Explainer videos, high-retention reels, YouTube documentaries, and podcast mastercuts.',
   email: 'Rajwarish38@gmail.com',
   whatsapp: '919905657907',
-  aboutLead: 'I am a video editor and visual storyteller editing professionally since 2022. I specialize in high-retention video production for YouTube creators, documentary explainers, podcasts, and social media.',
+  aboutLead: 'I am a video editor and visual storyteller. I specialize in high-retention video production for YouTube creators, documentary explainers, podcasts, and social media.',
   aboutRole: 'Full-time Video Editor at Postverse Media',
   aboutPhilosophy: 'Digital video content often gets lost in two extremes: either dry, unengaging recordings or chaotic, over-edited meme montages that distract the viewer. My editorial philosophy focuses on what truly matters: audience comprehension, emotional pacing, and Apple-grade visual polish.'
 };

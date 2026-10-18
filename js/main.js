@@ -536,14 +536,12 @@ function initLightbox() {
     const titleEl = document.getElementById('lightbox-title');
     const descEl = document.getElementById('lightbox-desc-text') || document.getElementById('lightbox-desc');
     const catEl = document.getElementById('lightbox-category');
-    const yearEl = document.getElementById('lightbox-year');
     const clientEl = document.getElementById('lightbox-client');
     const roleEl = document.getElementById('lightbox-role');
 
     if (titleEl) titleEl.textContent = data.title;
     if (descEl) descEl.textContent = data.desc;
     if (catEl) catEl.textContent = data.category;
-    if (yearEl) yearEl.textContent = data.year;
     if (clientEl) clientEl.textContent = data.client;
     if (roleEl) roleEl.textContent = data.role;
 
