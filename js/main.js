@@ -624,7 +624,7 @@ function initLightbox() {
           const fileWarningBanner = (isFile && isYouTube)
             ? `
               <div style="background: rgba(220, 38, 38, 0.2); border-bottom: 1px solid rgba(220, 38, 38, 0.35); padding: 8px 16px; font-size: 12px; color: #fecaca; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-                <span>⚠️ <strong>Notice:</strong> YouTube blocks playback on local disk (<code>file:///</code>). Use the live site <code>rajwarish123.github.io</code> or Google Drive links.</span>
+                <span>⚠️ <strong>Notice:</strong> YouTube blocks playback on local disk (<code>file:///</code>). Use the live site <code>collabwithwarish.github.io</code> or Google Drive links.</span>
                 <a href="${escapeHtml(embedConfig.directUrl)}" target="_blank" rel="noopener noreferrer" style="color: #ffffff; background: #ef4444; padding: 4px 12px; border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 11.5px; white-space: nowrap;">
                   Watch Video ↗
                 </a>
@@ -765,7 +765,7 @@ function initContact() {
               <div>
                 <strong style="color: #1e40af; font-size: 14.5px;">Local Preview Mode (file:///)</strong>
                 <p style="margin: 4px 0 10px; color: #1e3a8a; font-size: 13px; line-height: 1.5;">
-                  Direct email forwarding requires an online web domain. Please test sending from your live website: <a href="https://rajwarish123.github.io/#contact" target="_blank" style="color: #2563eb; font-weight: 700; text-decoration: underline;">rajwarish123.github.io</a>.
+                  Direct email forwarding requires an online web domain. Please test sending from your live website: <a href="https://collabwithwarish.github.io/#contact" target="_blank" style="color: #2563eb; font-weight: 700; text-decoration: underline;">collabwithwarish.github.io</a>.
                 </p>
               </div>
             </div>
