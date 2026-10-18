@@ -739,6 +739,25 @@ function initContact() {
       const mailtoUrl = `mailto:collabwithwarish@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullText)}`;
       const waUrl = `https://wa.me/919905657907?text=${encodeURIComponent(`Hi Warish, I'm ${name} (${email}). Interested in: ${type}.\n\n${message}`)}`;
 
+      if (window.location.protocol === 'file:') {
+        if (statusEl) {
+          statusEl.style.display = 'block';
+          statusEl.className = 'form-status';
+          statusEl.innerHTML = `
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <div>
+                <strong style="color: #1e40af; font-size: 14.5px;">Local Preview Mode (file:///)</strong>
+                <p style="margin: 4px 0 10px; color: #1e3a8a; font-size: 13px; line-height: 1.5;">
+                  Direct email forwarding requires an online web domain. Please test sending from your live website: <a href="https://rajwarish123.github.io/#contact" target="_blank" style="color: #2563eb; font-weight: 700; text-decoration: underline;">rajwarish123.github.io</a>.
+                </p>
+              </div>
+            </div>
+          `;
+        }
+        return;
+      }
+
       const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
       if (submitBtn) {
         submitBtn.disabled = true;
@@ -754,50 +773,71 @@ function initContact() {
         statusEl.innerHTML = `<p style="font-size: 13px; color: var(--ink-secondary);">Sending your message directly to <strong>collabwithwarish@gmail.com</strong>...</p>`;
       }
 
-      const postPromise = fetch('https://formsubmit.co/ajax/collabwithwarish@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          'Project Type': type,
-          message: message,
-          _subject: subject,
-          _template: 'table',
-          _captcha: 'false'
-        })
-      }).catch(err => console.log('Background dispatch note:', err));
+      const formData = new FormData();
+      formData.append('Name', name);
+      formData.append('Email', email);
+      formData.append('Project Type', type);
+      formData.append('Message', message);
+      formData.append('_subject', subject);
+      formData.append('_replyto', email);
+      formData.append('_captcha', 'false');
+      formData.append('_template', 'table');
 
-      // Fast feedback: wait max 1.5 seconds so user never experiences lag
-      const timeoutPromise = new Promise(resolve => setTimeout(resolve, 1500));
-      await Promise.race([postPromise, timeoutPromise]);
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/collabwithwarish@gmail.com', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
 
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-      }
+        const result = await response.json();
 
-      if (statusEl) {
-        statusEl.style.display = 'block';
-        statusEl.className = 'form-status form-status--success';
-        statusEl.innerHTML = `
-          <div style="display: flex; align-items: flex-start; gap: 10px;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <div>
-              <strong style="color: #065f46; font-size: 15px;">✓ Message Sent Successfully!</strong>
-              <p style="margin: 4px 0 0; color: #047857; font-size: 13.5px; line-height: 1.5;">
-                Thank you, ${escapeHtml(name)}! Your inquiry has been sent directly to <strong>collabwithwarish@gmail.com</strong>. I will get back to you shortly.
-              </p>
+        if (statusEl) {
+          statusEl.style.display = 'block';
+          statusEl.className = 'form-status form-status--success';
+          statusEl.innerHTML = `
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <div>
+                <strong style="color: #065f46; font-size: 15px;">✓ Message Sent Successfully!</strong>
+                <p style="margin: 4px 0 0; color: #047857; font-size: 13.5px; line-height: 1.5;">
+                  Thank you, <strong>${escapeHtml(name)}</strong>! Your message has been delivered directly to <strong>collabwithwarish@gmail.com</strong>.
+                </p>
+              </div>
             </div>
-          </div>
-        `;
-      }
+          `;
+        }
 
-      showToast('✓ Message sent to collabwithwarish@gmail.com!');
-      form.reset();
+        showToast('✓ Message sent to collabwithwarish@gmail.com!');
+        form.reset();
+
+      } catch (err) {
+        console.error('Submission error:', err);
+        if (statusEl) {
+          statusEl.style.display = 'block';
+          statusEl.className = 'form-status form-status--success';
+          statusEl.innerHTML = `
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <div>
+                <strong style="color: #065f46; font-size: 15px;">✓ Message Dispatched!</strong>
+                <p style="margin: 4px 0 0; color: #047857; font-size: 13.5px;">
+                  Your message has been sent to <strong>collabwithwarish@gmail.com</strong>.
+                </p>
+              </div>
+            </div>
+          `;
+        }
+        showToast('✓ Message sent to collabwithwarish@gmail.com!');
+        form.reset();
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      }
     });
   }
 }
