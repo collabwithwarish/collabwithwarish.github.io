@@ -180,7 +180,7 @@ function getVideoEmbedConfig(url, startTime = 0) {
       platform: 'youtube',
       platformLabel: 'YouTube',
       platformBadge: badgeText,
-      embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0${startParam}`,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1${startParam}`,
       directUrl: startSec ? `https://www.youtube.com/watch?v=${videoId}&t=${startSec}s` : `https://www.youtube.com/watch?v=${videoId}`,
       type: 'iframe',
       startSec: startSec
