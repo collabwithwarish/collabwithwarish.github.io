@@ -112,15 +112,23 @@ const DEFAULT_PROJECTS = {
     desc: 'A high-retention personal development reel crafted for Vrindda Bhatt. Designed with an intrigue-based contrarian hook, Apple-grade kinetic subtitles, crisp visual match cuts, and dynamic sound design that drives high average watch time.',
     videoUrl: 'https://youtube.com/shorts/0RUhTqSRrz8'
   },
+  'capitalmind-nri-investing': {
+    title: 'NRI Investing in India? Watch This Before You Move Your Money',
+    category: 'Podcast Mastercut',
+    tag: 'Podcast Mastercut • NRI Wealth',
+    client: 'Capitalmind',
+    role: 'Multi-Cam Dialogue Editing, Reaction Pacing & Financial Data Polish',
+    desc: 'An in-depth wealth management and investment podcast edited for Capitalmind. Crafted with dynamic multi-camera reaction timing, clean financial charts, and engaging conversational pacing that breaks down complex NRI cross-border tax and asset allocation rules.',
+    videoUrl: 'https://www.youtube.com/watch?v=1o38OH6hX4M'
+  },
   'podcast-founders': {
-    title: 'The Founder & Creator Journey: Multi-Cam Mastercut',
-    category: 'Podcast & Reels',
-    year: '2024–2025',
-    tag: 'Conversational Storytelling',
-    client: 'High-Profile Entrepreneurial Show',
-    role: 'Multi-Cam Narrative Editing, Reaction Cutting & Sound Pacing',
-    desc: 'Pacing dialogue around authentic human reactions. Holds on silent listening moments and delicate conversational shifts to build emotional intimacy and sustained engagement.',
-    videoUrl: 'https://www.youtube.com/watch?v=b4_G15F0oRw'
+    title: 'NRI Investing in India? Watch This Before You Move Your Money',
+    category: 'Podcast Mastercut',
+    tag: 'Podcast Mastercut • NRI Wealth',
+    client: 'Capitalmind',
+    role: 'Multi-Cam Dialogue Editing, Reaction Pacing & Financial Data Polish',
+    desc: 'An in-depth wealth management and investment podcast edited for Capitalmind. Crafted with dynamic multi-camera reaction timing, clean financial charts, and engaging conversational pacing that breaks down complex NRI cross-border tax and asset allocation rules.',
+    videoUrl: 'https://www.youtube.com/watch?v=1o38OH6hX4M'
   },
   'ai-cosmic': {
     title: 'Cosmic Odyssey: Deep Space & Sci-Fi Cinematics',

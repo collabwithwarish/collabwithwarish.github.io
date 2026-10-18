@@ -417,23 +417,39 @@ const projectsData = {
     videoUrl: 'https://youtube.com/shorts/0RUhTqSRrz8',
     startTime: 0
   },
-  'podcast-founders': {
-    title: 'The Founder’s Journey: Multi-Cam Podcast Mastercut',
-    category: 'Podcast & Reels',
-    year: '2024–2025',
-    tag: 'Conversational Storytelling',
-    client: 'High-Profile Entrepreneurial Show',
-    role: 'Multi-Cam Narrative Editing, Reaction Cutting & Sound Pacing',
-    desc: 'Great podcast editing is fundamentally about listening. Rather than simply switching to whoever is speaking, this cut prioritizes the listener’s emotional state — holding on quiet reactions, pregnant pauses, and subtle micro-expressions that reveal authentic vulnerability. By giving dialogue space to breathe, the conversation feels intimate and compelling.',
+  'capitalmind-nri-investing': {
+    title: 'NRI Investing in India? Watch This Before You Move Your Money',
+    category: 'Podcast Mastercut',
+    tag: 'Podcast Mastercut • NRI Wealth',
+    client: 'Capitalmind',
+    role: 'Multi-Cam Dialogue Editing, Reaction Pacing & Financial Data Polish',
+    desc: 'An in-depth wealth management and investment podcast edited for Capitalmind. Crafted with dynamic multi-camera reaction timing, clean financial charts, and engaging conversational pacing that breaks down complex NRI cross-border tax and asset allocation rules.',
     topics: [
-      'Reaction-driven multi-camera cutting over automated speaker-switching',
-      'Preserving conversational cadence and natural human rhythm',
-      'Subtle ambient soundscapes and warm vocal mastering',
-      'Narrative episodic teasers that pull viewers into the core conflict'
+      'Multi-camera dialogue timing and reaction-driven conversational cuts',
+      'Clean financial infographics and regulatory breakdown graphics',
+      'Strategic chapter pacing keeping long-form listeners engaged',
+      'Broadcast-level vocal balancing and subtle ambient sound design'
     ],
-    image: 'assets/projects/podcast-founders.svg',
-    // 👇 REPLACE WITH YOUR ACTUAL YOUTUBE URL
-    videoUrl: 'https://www.youtube.com/watch?v=b4_G15F0oRw'
+    image: 'assets/projects/capitalmind-podcast.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=1o38OH6hX4M',
+    startTime: 0
+  },
+  'podcast-founders': {
+    title: 'NRI Investing in India? Watch This Before You Move Your Money',
+    category: 'Podcast Mastercut',
+    tag: 'Podcast Mastercut • NRI Wealth',
+    client: 'Capitalmind',
+    role: 'Multi-Cam Dialogue Editing, Reaction Pacing & Financial Data Polish',
+    desc: 'An in-depth wealth management and investment podcast edited for Capitalmind. Crafted with dynamic multi-camera reaction timing, clean financial charts, and engaging conversational pacing that breaks down complex NRI cross-border tax and asset allocation rules.',
+    topics: [
+      'Multi-camera dialogue timing and reaction-driven conversational cuts',
+      'Clean financial infographics and regulatory breakdown graphics',
+      'Strategic chapter pacing keeping long-form listeners engaged',
+      'Broadcast-level vocal balancing and subtle ambient sound design'
+    ],
+    image: 'assets/projects/capitalmind-podcast.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=1o38OH6hX4M',
+    startTime: 0
   },
   'ai-cosmic': {
     title: 'Cosmic Odyssey: Deep Space & Sci-Fi Cinematics',
