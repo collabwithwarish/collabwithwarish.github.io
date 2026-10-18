@@ -315,6 +315,7 @@ const projectsData = {
     tag: 'Podcast Mastercut • Viral',
     client: 'Shivohaam & Vrindda (Body, Mind & Beyond)',
     role: 'Lead Podcast Editor, Reaction Pacing & Sound Design',
+    highlight: '🔥 **This video crossed 3 Million+ views on Instagram in 2 days.**',
     desc: 'High-impact podcast episode edited for Shivohaam & Vrindda. **This video crossed 3 Million+ views on Instagram in just 2 days.** Edited with high-retention conversational pacing, suspense hooks, dynamic multi-camera reaction timing, and atmospheric background score leveling.',
     topics: [
       '**Crossed 3 Million+ views on Instagram in just 2 days**',
@@ -561,6 +562,17 @@ function initLightbox() {
     if (catEl) catEl.textContent = data.category;
     if (clientEl) clientEl.textContent = data.client;
     if (roleEl) roleEl.textContent = data.role;
+
+    const highlightEl = document.getElementById('lightbox-highlight');
+    if (highlightEl) {
+      if (data.highlight) {
+        highlightEl.innerHTML = data.highlight.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        highlightEl.style.display = 'block';
+      } else {
+        highlightEl.style.display = 'none';
+        highlightEl.innerHTML = '';
+      }
+    }
 
     const topicsList = document.getElementById('lightbox-topics-list') || document.getElementById('lightbox-topics');
     if (topicsList) {
