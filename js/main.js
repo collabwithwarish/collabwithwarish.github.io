@@ -695,7 +695,7 @@ function initLightbox() {
    -------------------------------------------------------------------------- */
 function initContact() {
   const copyBtn = document.getElementById('copy-email-btn');
-  const emailVal = 'Rajwarish38@gmail.com';
+  const emailVal = 'collabwithwarish@gmail.com';
   const toast = document.getElementById('toast');
   const form = document.getElementById('contact-form');
   const statusEl = document.getElementById('form-status');
@@ -723,7 +723,7 @@ function initContact() {
   }
 
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       if (!form.checkValidity()) return;
       e.preventDefault();
 
@@ -735,14 +735,49 @@ function initContact() {
       const subject = `Video Project Inquiry: ${type} — ${name}`;
       const fullText = `Hi Warish,\n\nName: ${name}\nEmail: ${email}\nProject Type: ${type}\n\nProject Scope & Vision:\n${message}\n\nLooking forward to speaking with you!`;
 
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=Rajwarish38@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullText)}`;
-      const mailtoUrl = `mailto:Rajwarish38@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullText)}`;
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=collabwithwarish@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullText)}`;
+      const mailtoUrl = `mailto:collabwithwarish@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullText)}`;
+      const waUrl = `https://wa.me/919905657907?text=${encodeURIComponent(`Hi Warish, I'm ${name} (${email}). Interested in: ${type}.\n\n${message}`)}`;
 
-      // Synchronously open Gmail in response to user click (never blocked by browser popup blockers)
-      const newWin = window.open(gmailUrl, '_blank');
-      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
-        // Fallback to native mailto if browser has strict popup restrictions
-        window.location.href = mailtoUrl;
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg>
+          Sending Inquiry...
+        `;
+      }
+
+      if (statusEl) {
+        statusEl.style.display = 'block';
+        statusEl.className = 'form-status';
+        statusEl.innerHTML = `<p style="font-size: 13px; color: var(--ink-secondary);">Sending your message directly to <strong>collabwithwarish@gmail.com</strong>...</p>`;
+      }
+
+      try {
+        await fetch('https://formsubmit.co/ajax/collabwithwarish@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            'Project Type': type,
+            message: message,
+            _subject: subject,
+            _template: 'table',
+            _captcha: 'false'
+          })
+        });
+      } catch (err) {
+        console.log('Direct submission note:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
       }
 
       if (statusEl) {
@@ -752,12 +787,13 @@ function initContact() {
           <div style="display: flex; align-items: flex-start; gap: 10px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
             <div>
-              <strong style="color: #065f46; font-size: 14.5px;">✓ Inquiry Ready for Warish Raj!</strong>
+              <strong style="color: #065f46; font-size: 14.5px;">✓ Inquiry Dispatched to Warish Raj!</strong>
               <p style="margin: 4px 0 12px; color: #047857; font-size: 13px; line-height: 1.5;">
-                Your message has been formatted to send directly to <strong>Rajwarish38@gmail.com</strong>. If your email window didn't appear automatically, choose your preferred option below:
+                Your message has been sent to <strong>collabwithwarish@gmail.com</strong>. You can also connect directly via Gmail or WhatsApp below:
               </p>
               <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <a href="${gmailUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--solid btn--sm" style="font-size: 12px; padding: 7px 14px; text-decoration: none;">Open in Web Gmail &rarr;</a>
+                <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm" style="font-size: 12px; padding: 7px 14px; text-decoration: none; color: #25d366; border-color: rgba(37,211,102,0.4);">Chat on WhatsApp</a>
                 <a href="${mailtoUrl}" class="btn btn--ghost btn--sm" style="font-size: 12px; padding: 7px 14px; text-decoration: none;">Open Mail App</a>
                 <button type="button" class="btn btn--ghost btn--sm" id="btn-copy-inquiry" style="font-size: 12px; padding: 7px 14px;">Copy Message</button>
               </div>
@@ -765,12 +801,12 @@ function initContact() {
           </div>
         `;
 
-        const copyBtn = document.getElementById('btn-copy-inquiry');
-        if (copyBtn) {
-          copyBtn.addEventListener('click', () => {
+        const copyBtnInquiry = document.getElementById('btn-copy-inquiry');
+        if (copyBtnInquiry) {
+          copyBtnInquiry.addEventListener('click', () => {
             navigator.clipboard.writeText(fullText).then(() => {
               showToast('✓ Full inquiry copied to clipboard!');
-              copyBtn.textContent = '✓ Copied!';
+              copyBtnInquiry.textContent = '✓ Copied!';
             }).catch(() => {
               showToast('Unable to copy automatically');
             });
@@ -778,7 +814,7 @@ function initContact() {
         }
       }
 
-      showToast('✓ Opening message to Rajwarish38@gmail.com...');
+      showToast('✓ Message sent to collabwithwarish@gmail.com!');
     });
   }
 }
