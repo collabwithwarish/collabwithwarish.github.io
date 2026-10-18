@@ -43,6 +43,16 @@ const DEFAULT_PROJECTS = {
     desc: 'A high-retention macroeconomic analysis breakdown edited for ICICI Prudential Mutual Fund. Dynamic pacing, institutional data graphics, and structured storytelling that breaks down complex equity market catalysts for intelligent investors.',
     videoUrl: 'https://www.youtube.com/watch?v=qr7FplzumYY'
   },
+  'invesco-parking-money': {
+    title: 'Where Should You Park Money for 6 Months or More?',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Investor Education & Debt',
+    client: 'Invesco Mutual Fund',
+    role: 'Editorial Story Flow, Clean Data Graphics & Pacing',
+    desc: 'An educational investment guide edited for Invesco Mutual Fund. Simplifying short-term debt allocation, liquid funds, and capital preservation with clear visual comparisons and conversational pacing.',
+    videoUrl: 'https://www.youtube.com/watch?v=3bduQgeKAAM'
+  },
   'finance-funds': {
     title: '3 Things to Avoid When Setting Up a Family Office',
     category: 'YouTube Documentary',

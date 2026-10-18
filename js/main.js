@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v4.2';
+  const DATA_VERSION = 'v4.3';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -289,6 +289,24 @@ const projectsData = {
     ],
     image: 'assets/projects/icici-market-analysis.jpg',
     videoUrl: 'https://www.youtube.com/watch?v=qr7FplzumYY',
+    startTime: 0
+  },
+  'invesco-parking-money': {
+    title: 'Where Should You Park Money for 6 Months or More?',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Investor Education & Debt',
+    client: 'Invesco Mutual Fund',
+    role: 'Editorial Story Flow, Clean Data Graphics & Pacing',
+    desc: 'An educational investment guide edited for Invesco Mutual Fund. Simplifying short-term debt allocation, liquid funds, and capital preservation with clear visual comparisons and conversational pacing.',
+    topics: [
+      'Simplifying complex debt fund mechanics and short-term capital preservation',
+      'Minimalist comparative graphs contrasting fixed deposits with debt instruments',
+      'Engaging editorial flow holding viewer focus across financial education topics',
+      'Crisp vocal mastering and subtle acoustic sound beds'
+    ],
+    image: 'assets/projects/invesco-parking-money.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=3bduQgeKAAM',
     startTime: 0
   },
   'finance-funds': {
