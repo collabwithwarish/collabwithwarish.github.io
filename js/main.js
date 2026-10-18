@@ -500,12 +500,6 @@ function initLightbox() {
                 <source src="${escapeHtml(embedConfig.embedUrl)}">
                 Your browser does not support HTML5 video.
               </video>
-              <div class="lightbox-player-bar">
-                <div class="player-bar-left">
-                  <span class="player-bar-dot"></span>
-                  <span class="player-bar-title">${escapeHtml(embedConfig.platformBadge)}</span>
-                </div>
-              </div>
             </div>
           `;
         } else {
@@ -515,7 +509,7 @@ function initLightbox() {
           const fileWarningBanner = (isFile && isYouTube)
             ? `
               <div style="background: rgba(220, 38, 38, 0.2); border-bottom: 1px solid rgba(220, 38, 38, 0.35); padding: 8px 16px; font-size: 12px; color: #fecaca; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-                <span>⚠️ <strong>Notice:</strong> YouTube blocks playback on local disk (<code>file:///</code>). Double-click <code>start-server.bat</code> to preview in-page, or use Google Drive video links.</span>
+                <span>⚠️ <strong>Notice:</strong> YouTube blocks playback on local disk (<code>file:///</code>). Use the live site <code>rajwarish123.github.io</code> or Google Drive links.</span>
                 <a href="${escapeHtml(embedConfig.directUrl)}" target="_blank" rel="noopener noreferrer" style="color: #ffffff; background: #ef4444; padding: 4px 12px; border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 11.5px; white-space: nowrap;">
                   Watch Video ↗
                 </a>
@@ -535,17 +529,6 @@ function initLightbox() {
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen>
               </iframe>
-              <div class="lightbox-player-bar">
-                <div class="player-bar-left">
-                  <span class="player-bar-dot"></span>
-                  <span class="player-bar-title">${escapeHtml(embedConfig.platformBadge)}</span>
-                </div>
-                <div class="player-bar-right">
-                  <a href="${escapeHtml(embedConfig.directUrl)}" target="_blank" rel="noopener noreferrer" class="player-bar-link">
-                    Open ${escapeHtml(embedConfig.platformLabel)} link ↗
-                  </a>
-                </div>
-              </div>
             </div>
           `;
         }
