@@ -1,0 +1,974 @@
+/**
+ * Warish Raj — Portfolio Interactive Engine
+ * Bright Apple UI • Glassmorphism • Visual Storyteller Experience
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyDynamicSettings();
+  initBackgroundVideo();
+  initClock();
+  initPortfolio();
+  initLightbox();
+  initContact();
+  initMobileNav();
+  initScrollSpy();
+  initMouseFollower();
+});
+
+/* --------------------------------------------------------------------------
+   Dynamic Content Hydration (Powered by Admin Panel)
+   -------------------------------------------------------------------------- */
+function applyDynamicSettings() {
+  const DATA_VERSION = 'v4.0';
+  if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
+    localStorage.removeItem('warish_projects');
+    localStorage.setItem('warish_data_version', DATA_VERSION);
+  }
+
+  const settings = JSON.parse(localStorage.getItem('warish_settings'));
+  if (settings) {
+    const badgeText = document.querySelector('.badge__text');
+    if (badgeText && settings.badge) badgeText.textContent = settings.badge;
+
+    const heroSub = document.querySelector('.hero__subtitle');
+    if (heroSub && settings.heroSub) heroSub.textContent = settings.heroSub;
+
+    const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+    if (settings.email) {
+      emailLinks.forEach(a => {
+        a.href = `mailto:${settings.email}`;
+        if (a.classList.contains('email-address')) a.textContent = settings.email;
+      });
+    }
+
+    const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
+    if (settings.whatsapp) {
+      whatsappLinks.forEach(a => {
+        a.href = `https://wa.me/${settings.whatsapp}?text=Hi%20Warish,%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project.`;
+      });
+    }
+  }
+
+  // Update Services if saved in admin panel
+  const savedServices = JSON.parse(localStorage.getItem('warish_services'));
+  if (savedServices && savedServices.length) {
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card, idx) => {
+      const data = savedServices[idx];
+      if (data) {
+        const badge = card.querySelector('.service-card__badge');
+        const title = card.querySelector('.service-title');
+        const desc = card.querySelector('.service-desc');
+        if (badge && data.num) badge.textContent = data.num;
+        if (title && data.title) title.textContent = data.title;
+        if (desc && data.desc) desc.textContent = data.desc;
+      }
+    });
+  }
+
+  // Update Work Grid Titles/Descriptions from custom projects
+  const savedProjects = JSON.parse(localStorage.getItem('warish_projects'));
+  if (savedProjects) {
+    Object.keys(savedProjects).forEach(key => {
+      const p = savedProjects[key];
+      const item = document.querySelector(`[data-project-id="${key}"]`);
+      if (item && p) {
+        const title = item.querySelector('.work-item__title');
+        const desc = item.querySelector('.work-item__desc');
+        if (title && p.title) title.textContent = p.title;
+        if (desc && p.desc) desc.textContent = p.desc;
+      }
+    });
+  }
+}
+
+function getActiveProjectsData() {
+  const custom = JSON.parse(localStorage.getItem('warish_projects'));
+  if (!custom) return projectsData;
+  return Object.assign({}, projectsData, custom);
+}
+
+/* --------------------------------------------------------------------------
+   1. Live Studio Clock (IST)
+   -------------------------------------------------------------------------- */
+function initClock() {
+  const timeEl = document.getElementById('local-time');
+  if (!timeEl) return;
+
+  function update() {
+    const now = new Date();
+    const options = {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    };
+    try {
+      const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+      timeEl.textContent = `${timeString} IST`;
+    } catch (e) {
+      timeEl.textContent = now.toLocaleTimeString() + ' IST';
+    }
+  }
+
+  update();
+  setInterval(update, 1000);
+}
+
+/* --------------------------------------------------------------------------
+   Helper: Universal Video Parser & Embed Engine
+   Supports:
+   - Google Drive Video Share Links (drive.google.com/file/d/...)
+   - YouTube (watch?v=ID, youtu.be/ID, shorts/ID, embed/ID)
+   - Vimeo (vimeo.com/ID)
+   - Direct video files (.mp4, .webm, .ogg)
+   -------------------------------------------------------------------------- */
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function getVideoEmbedConfig(url, startTime = 0) {
+  if (!url || typeof url !== 'string') return null;
+  const cleanUrl = url.trim();
+
+  // 1. Google Drive Share Links
+  // Formats:
+  // - https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+  // - https://drive.google.com/file/d/FILE_ID/preview
+  // - https://drive.google.com/open?id=FILE_ID
+  // - https://drive.google.com/uc?id=FILE_ID
+  const gDriveMatch = cleanUrl.match(/(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)|docs\.google\.com\/file\/d\/)([a-zA-Z0-9_-]{20,})/);
+  if (gDriveMatch && gDriveMatch[1]) {
+    const fileId = gDriveMatch[1];
+    return {
+      platform: 'google-drive',
+      platformLabel: 'Google Drive',
+      platformBadge: '📁 Google Drive Player',
+      embedUrl: `https://drive.google.com/file/d/${fileId}/preview`,
+      directUrl: `https://drive.google.com/file/d/${fileId}/view`,
+      type: 'iframe'
+    };
+  }
+
+  // 2. YouTube Links
+  // Formats:
+  // - https://www.youtube.com/watch?v=ID
+  // - https://youtu.be/ID?si=...
+  // - https://www.youtube.com/shorts/ID
+  // - https://www.youtube.com/embed/ID
+  const ytMatch = cleanUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([a-zA-Z0-9_-]{11})/);
+  if (ytMatch && ytMatch[1]) {
+    const videoId = ytMatch[1];
+    let startSec = startTime || 0;
+    if (!startSec) {
+      const tMatch = cleanUrl.match(/[?&](?:t|start)=(\d+)/);
+      if (tMatch) startSec = parseInt(tMatch[1], 10);
+    }
+    const startParam = startSec ? `&start=${startSec}` : '';
+    const badgeText = startSec 
+      ? `▶ YouTube Player • Starts at 0:${startSec < 10 ? '0' + startSec : startSec}` 
+      : '▶ YouTube Player';
+
+    return {
+      platform: 'youtube',
+      platformLabel: 'YouTube',
+      platformBadge: badgeText,
+      embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0${startParam}`,
+      directUrl: startSec ? `https://www.youtube.com/watch?v=${videoId}&t=${startSec}s` : `https://www.youtube.com/watch?v=${videoId}`,
+      type: 'iframe',
+      startSec: startSec
+    };
+  }
+
+  // 3. Vimeo Links
+  const vimeoMatch = cleanUrl.match(/(?:vimeo\.com\/)(\d+)/);
+  if (vimeoMatch && vimeoMatch[1]) {
+    return {
+      platform: 'vimeo',
+      platformLabel: 'Vimeo',
+      platformBadge: '▶ Vimeo Player',
+      embedUrl: `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`,
+      directUrl: `https://vimeo.com/${vimeoMatch[1]}`,
+      type: 'iframe'
+    };
+  }
+
+  // 4. Direct HTML5 Video (.mp4, .webm, .ogg)
+  if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(cleanUrl)) {
+    return {
+      platform: 'direct',
+      platformLabel: 'Direct Video',
+      platformBadge: '🎬 Video Player',
+      embedUrl: cleanUrl,
+      directUrl: cleanUrl,
+      type: 'video'
+    };
+  }
+
+  // 5. Raw embed / preview URL fallback
+  if (cleanUrl.includes('/embed/') || cleanUrl.includes('/preview')) {
+    return {
+      platform: 'embed',
+      platformLabel: 'Video Player',
+      platformBadge: '▶ Video Player',
+      embedUrl: cleanUrl,
+      directUrl: cleanUrl,
+      type: 'iframe'
+    };
+  }
+
+  return null;
+}
+
+function getYouTubeEmbedUrl(url, startTime = 0) {
+  const config = getVideoEmbedConfig(url, startTime);
+  return config ? config.embedUrl : null;
+}
+
+/* --------------------------------------------------------------------------
+   2. Project Database — Storyteller Video Editor Perspective
+   (Supports YouTube URLs, Google Drive video share links, Vimeo, and MP4s)
+   -------------------------------------------------------------------------- */
+const projectsData = {
+  'finavenue-construction': {
+    title: "The ₹4,700 Cr Market Hiding Behind India's Construction Boom",
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Documentary Explainer',
+    client: 'Finavenue',
+    role: 'Editorial Story Flow, Data Motion Graphics & Sound Design',
+    desc: 'An industry documentary exploring India’s massive construction and infrastructure supply chain. Engineered with high-retention narrative hooks, kinetic data visualizations, and cinematic pacing that demystifies a multi-billion dollar market without cognitive overload.',
+    topics: [
+      'Hook-driven opening starting right at the core conflict (5s start mark)',
+      'Kinetic market data and supply chain motion graphics',
+      'High-retention documentary pacing holding viewer interest across 10+ minutes',
+      'Dynamic sound beds and audio mastering that drive narrative momentum'
+    ],
+    image: 'assets/projects/finavenue-construction.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=NGz3-gmqQto&t=5s',
+    startTime: 5
+  },
+  'motilal-family-office': {
+    title: '3 Things to Avoid When Setting Up a Family Office',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Market & Wealth Storytelling',
+    client: 'Motilal Oswal AMC',
+    role: 'Editorial Story Flow, Kinetic Graphics & Sound Pacing',
+    desc: 'A high-impact wealth management and family office masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
+    topics: [
+      'High-retention corporate storytelling and wealth structuring narrative',
+      'Kinetic financial infographics and institutional data polish',
+      'Strategic visual pacing designed for ultra-high-net-worth investors',
+      'Warm vocal balancing, ambient beds, and broadcast-level sound design'
+    ],
+    image: 'assets/projects/motilal-family-office.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=9J-Zbk6ItEQ',
+    startTime: 0
+  },
+  'finance-funds': {
+    title: '3 Things to Avoid When Setting Up a Family Office',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Market & Wealth Storytelling',
+    client: 'Motilal Oswal AMC',
+    role: 'Editorial Story Flow, Kinetic Graphics & Sound Pacing',
+    desc: 'A high-impact wealth management and family office masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
+    topics: [
+      'High-retention corporate storytelling and wealth structuring narrative',
+      'Kinetic financial infographics and institutional data polish',
+      'Strategic visual pacing designed for ultra-high-net-worth investors',
+      'Warm vocal balancing, ambient beds, and broadcast-level sound design'
+    ],
+    image: 'assets/projects/motilal-family-office.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=9J-Zbk6ItEQ',
+    startTime: 0
+  },
+  'finance-compounding': {
+    title: '3 Things to Avoid When Setting Up a Family Office',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Market & Wealth Storytelling',
+    client: 'Motilal Oswal AMC',
+    role: 'Editorial Story Flow, Kinetic Graphics & Sound Pacing',
+    desc: 'A high-impact wealth management and family office masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
+    topics: [
+      'High-retention corporate storytelling and wealth structuring narrative',
+      'Kinetic financial infographics and institutional data polish',
+      'Strategic visual pacing designed for ultra-high-net-worth investors',
+      'Warm vocal balancing, ambient beds, and broadcast-level sound design'
+    ],
+    image: 'assets/projects/motilal-family-office.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=9J-Zbk6ItEQ',
+    startTime: 0
+  },
+  'podcast-reels': {
+    title: 'Story-Driven Vertical Reels & Creator Shorts',
+    category: 'Podcast & Reels',
+    year: '2024–2025',
+    tag: 'Short-Form Narrative',
+    client: 'Independent Shows & Social Creators',
+    role: 'Hook Crafting, Retention Flow & Emotional Resonance',
+    desc: 'Short-form content frequently suffers from gimmick overload — flashing colors and deafening sound effects that trigger fatigue. My approach proves that retention is built on story structure: opening with an intriguing premise, building curiosity across 15 seconds, and delivering a meaningful payoff. This delivers 85%+ retention through genuine substance.',
+    topics: [
+      '3-second storytelling hooks rooted in intrigue rather than panic',
+      'Elegant, legible kinetic subtitles styled with Apple-grade minimalism',
+      'Seamless match cuts that keep the viewer subconsciously engaged',
+      'Respectful pacing tailored for intelligent audiences'
+    ],
+    image: 'assets/projects/podcast-reels.svg',
+    // 👇 REPLACE WITH YOUR ACTUAL YOUTUBE URL
+    videoUrl: 'https://www.youtube.com/watch?v=hZ8G14A633E'
+  },
+  'podcast-founders': {
+    title: 'The Founder’s Journey: Multi-Cam Podcast Mastercut',
+    category: 'Podcast & Reels',
+    year: '2024–2025',
+    tag: 'Conversational Storytelling',
+    client: 'High-Profile Entrepreneurial Show',
+    role: 'Multi-Cam Narrative Editing, Reaction Cutting & Sound Pacing',
+    desc: 'Great podcast editing is fundamentally about listening. Rather than simply switching to whoever is speaking, this cut prioritizes the listener’s emotional state — holding on quiet reactions, pregnant pauses, and subtle micro-expressions that reveal authentic vulnerability. By giving dialogue space to breathe, the conversation feels intimate and compelling.',
+    topics: [
+      'Reaction-driven multi-camera cutting over automated speaker-switching',
+      'Preserving conversational cadence and natural human rhythm',
+      'Subtle ambient soundscapes and warm vocal mastering',
+      'Narrative episodic teasers that pull viewers into the core conflict'
+    ],
+    image: 'assets/projects/podcast-founders.svg',
+    // 👇 REPLACE WITH YOUR ACTUAL YOUTUBE URL
+    videoUrl: 'https://www.youtube.com/watch?v=b4_G15F0oRw'
+  },
+  'ai-cosmic': {
+    title: 'Cosmic Odyssey: Deep Space & Sci-Fi Cinematics',
+    category: 'AI Visuals',
+    year: '2024–2025',
+    tag: 'Worldbuilding & Scale',
+    client: 'Creative Spec / Conceptual Production',
+    role: 'Visual Concepting, Scene Synthesis & Filmic Grading',
+    desc: 'Generative visuals are most powerful when guided by a filmmaker’s eye for atmosphere and light. In this speculative sci-fi piece, visual generation served the overarching story of exploration and cosmic scale. Each scene was color graded with a cohesive filmic palette to avoid the artificial, plastic look typical of raw synthetic renders.',
+    topics: [
+      'Visual generation serving story mood and cinematic scale',
+      'Shot architecture focused on camera lenses, depth of field, and lighting',
+      'Filmic color grading to integrate imagery into cohesive narrative tone',
+      'Sound design that grounds sci-fi landscapes in physical weight'
+    ],
+    image: 'assets/projects/ai-cosmic.svg',
+    // 👇 REPLACE WITH YOUR ACTUAL YOUTUBE URL
+    videoUrl: 'https://www.youtube.com/watch?v=kJQP7kiw5Fk'
+  },
+  'ai-industrial': {
+    title: 'Future Industry: Autonomous Robotics & Manufacturing',
+    category: 'AI Visuals',
+    year: '2024',
+    tag: 'Documentary Concept',
+    client: 'Industrial & Tech Visualization',
+    role: 'Visual Direction, Sequence Assembly & Pacing',
+    desc: 'A visual sequence exploring the human impact of robotics in modern logistics and manufacturing. Rather than chaotic montage clips, each frame is staged like a high-end industrial documentary — steady camera pans, intentional focal points, and rhythmic cutting that conveys precision engineering.',
+    topics: [
+      'Documentary-style visual sequencing of smart manufacturing',
+      'Visual rhythm inspired by industrial machinery movements',
+      'Clean composition and realistic lighting models',
+      'Seamless synthesis between synthetic imagery and real-world logic'
+    ],
+    image: 'assets/projects/ai-industrial.svg',
+    // 👇 REPLACE WITH YOUR ACTUAL YOUTUBE URL
+    videoUrl: 'https://www.youtube.com/watch?v=l_8p1Yg2o8A'
+  },
+  'branding-studio': {
+    title: 'Studio Environments & Broadcast Visual Identity',
+    category: 'Branding & Studio',
+    year: '2024–2025',
+    tag: 'Studio Atmosphere',
+    client: 'Creator Studios & Episodic Shows',
+    role: 'Set Atmosphere Design, Broadcast Packages & Visual Tone',
+    desc: 'A storyteller understands that the physical environment is an active character in any show. These virtual studio set backdrops, lower-thirds packages, and motion identities were designed to give interview shows an elevated, timeless presence reminiscent of prestige broadcast documentaries.',
+    topics: [
+      'Studio background staging that complements human skin tones',
+      'Restrained lower-thirds that inform without distracting from the speaker',
+      'Consistent graphic language across long-form video and social cuts',
+      'Atmospheric set design enhancing conversational warmth'
+    ],
+    image: 'assets/projects/branding-studio.svg',
+    // 👇 REPLACE WITH YOUR ACTUAL YOUTUBE URL
+    videoUrl: 'https://www.youtube.com/watch?v=8m9g_ZkXyZ8'
+  },
+  'result-darpan': {
+    title: 'Result Darpan — Centralized Student Education Platform',
+    category: 'Web & App Dev',
+    year: '2024–2025',
+    tag: 'Featured Web Product',
+    client: 'Educational Initiative (Result Darpan)',
+    role: 'Web Development, Product Conceptualization, Architecture',
+    desc: 'Result Darpan is an educational platform project born from a passion to solve real problems for students across India. The planned platform brings mock tests, subject-wise practice, topper insights, and study materials into one clean, accessible digital experience.',
+    topics: [
+      'Mock tests and practice exam modules for competitive students',
+      'Subject-wise tests and structured syllabus tracking (Planned)',
+      'Doubt-solving interactive framework (Planned)',
+      'Meet-toppers interviews and strategy guides',
+      'Centralized, high-speed study material repository'
+    ],
+    image: 'assets/projects/result-darpan.svg',
+    projectUrl: 'https://resultdarpan.com/'
+  }
+};
+
+/* --------------------------------------------------------------------------
+   3. Portfolio Filtering Logic
+   -------------------------------------------------------------------------- */
+function initPortfolio() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const workItems = document.querySelectorAll('.work-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      workItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (filterVal === 'all' || itemCategory === filterVal) {
+          item.style.display = 'flex';
+          item.style.animation = 'fadeUp 0.35s ease forwards';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   4. Video & Project Lightbox Modal
+   -------------------------------------------------------------------------- */
+function initLightbox() {
+  const lightbox = document.getElementById('video-lightbox');
+  const closeBtn = document.getElementById('lightbox-close');
+  const triggerItems = document.querySelectorAll('[data-project-id]');
+
+  if (!lightbox) return;
+
+  function openModal(projectId) {
+    const activeData = getActiveProjectsData();
+    const data = activeData[projectId];
+    if (!data) return;
+
+    const titleEl = document.getElementById('lightbox-title');
+    const descEl = document.getElementById('lightbox-desc-text') || document.getElementById('lightbox-desc');
+    const catEl = document.getElementById('lightbox-category');
+    const yearEl = document.getElementById('lightbox-year');
+    const clientEl = document.getElementById('lightbox-client');
+    const roleEl = document.getElementById('lightbox-role');
+
+    if (titleEl) titleEl.textContent = data.title;
+    if (descEl) descEl.textContent = data.desc;
+    if (catEl) catEl.textContent = data.category;
+    if (yearEl) yearEl.textContent = data.year;
+    if (clientEl) clientEl.textContent = data.client;
+    if (roleEl) roleEl.textContent = data.role;
+
+    const topicsList = document.getElementById('lightbox-topics-list') || document.getElementById('lightbox-topics');
+    if (topicsList) {
+      topicsList.innerHTML = '';
+      if (data.topics && data.topics.length) {
+        data.topics.forEach(t => {
+          const li = document.createElement('li');
+          li.textContent = t;
+          topicsList.appendChild(li);
+        });
+      }
+    }
+
+    const mediaContainer = document.getElementById('lightbox-media-container');
+    const embedConfig = getVideoEmbedConfig(data.videoUrl, data.startTime);
+
+    if (mediaContainer) {
+      if (embedConfig) {
+        if (embedConfig.type === 'video') {
+          // Direct HTML5 Video Player
+          mediaContainer.innerHTML = `
+            <div class="lightbox-player-wrapper">
+              <video controls autoplay playsinline style="width: 100%; height: 100%; flex: 1; object-fit: contain; background: #000;">
+                <source src="${escapeHtml(embedConfig.embedUrl)}">
+                Your browser does not support HTML5 video.
+              </video>
+              <div class="lightbox-player-bar">
+                <div class="player-bar-left">
+                  <span class="player-bar-dot"></span>
+                  <span class="player-bar-title">${escapeHtml(embedConfig.platformBadge)}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // Embedded Iframe (Google Drive, YouTube, Vimeo)
+          const isFile = window.location.protocol === 'file:';
+          const isYouTube = embedConfig.platform === 'youtube';
+          const fileWarningBanner = (isFile && isYouTube)
+            ? `
+              <div style="background: rgba(220, 38, 38, 0.2); border-bottom: 1px solid rgba(220, 38, 38, 0.35); padding: 8px 16px; font-size: 12px; color: #fecaca; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <span>⚠️ <strong>Notice:</strong> YouTube blocks playback on local disk (<code>file:///</code>). Double-click <code>start-server.bat</code> to preview in-page, or use Google Drive video links.</span>
+                <a href="${escapeHtml(embedConfig.directUrl)}" target="_blank" rel="noopener noreferrer" style="color: #ffffff; background: #ef4444; padding: 4px 12px; border-radius: 9999px; text-decoration: none; font-weight: 600; font-size: 11.5px; white-space: nowrap;">
+                  Watch Video ↗
+                </a>
+              </div>
+            `
+            : '';
+
+          mediaContainer.innerHTML = `
+            <div class="lightbox-player-wrapper">
+              ${fileWarningBanner}
+              <iframe 
+                class="lightbox-player-frame"
+                src="${escapeHtml(embedConfig.embedUrl)}" 
+                title="${escapeHtml(data.title)}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+              </iframe>
+              <div class="lightbox-player-bar">
+                <div class="player-bar-left">
+                  <span class="player-bar-dot"></span>
+                  <span class="player-bar-title">${escapeHtml(embedConfig.platformBadge)}</span>
+                </div>
+                <div class="player-bar-right">
+                  <a href="${escapeHtml(embedConfig.directUrl)}" target="_blank" rel="noopener noreferrer" class="player-bar-link">
+                    Open ${escapeHtml(embedConfig.platformLabel)} link ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      } else if (data.image) {
+        mediaContainer.innerHTML = `<img src="${escapeHtml(data.image)}" alt="${escapeHtml(data.title)}" style="width: 100%; height: 100%; object-fit: contain;">`;
+      } else {
+        mediaContainer.innerHTML = '';
+      }
+    }
+
+    const actionBtn = document.getElementById('lightbox-action-btn');
+    const actionText = document.getElementById('lightbox-action-text');
+
+    if (actionBtn) {
+      if (data.projectUrl) {
+        actionBtn.style.display = 'inline-flex';
+        actionBtn.href = data.projectUrl;
+        if (actionText) actionText.textContent = 'Visit Platform Website';
+      } else if (embedConfig) {
+        actionBtn.style.display = 'inline-flex';
+        actionBtn.href = embedConfig.directUrl;
+        if (actionText) actionText.textContent = `Open on ${embedConfig.platformLabel} ↗`;
+      } else {
+        actionBtn.style.display = 'none';
+      }
+    }
+
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+    // Immediately stop YouTube video playback so audio stops when modal is closed
+    const mediaContainer = document.getElementById('lightbox-media-container');
+    if (mediaContainer) {
+      mediaContainer.innerHTML = '';
+    }
+  }
+
+  triggerItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (e.target.tagName.toLowerCase() === 'a' && e.target.getAttribute('href')?.startsWith('http')) {
+        return;
+      }
+      const id = item.getAttribute('data-project-id');
+      openModal(id);
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) closeModal();
+  });
+}
+
+/* --------------------------------------------------------------------------
+   5. Interactive Contact Form & Email Delivery Engine
+   -------------------------------------------------------------------------- */
+function initContact() {
+  const copyBtn = document.getElementById('copy-email-btn');
+  const emailVal = 'Rajwarish38@gmail.com';
+  const toast = document.getElementById('toast');
+  const form = document.getElementById('contact-form');
+  const statusEl = document.getElementById('form-status');
+  const submitBtn = form?.querySelector('button[type="submit"]');
+
+  function showToast(message) {
+    if (!toast) return;
+    const msgEl = document.getElementById('toast-message') || toast;
+    msgEl.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3500);
+  }
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(emailVal);
+        showToast('✓ Email copied to clipboard: ' + emailVal);
+      } catch (err) {
+        showToast('Email: ' + emailVal);
+      }
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      if (!form.checkValidity()) return;
+      e.preventDefault();
+
+      const name = document.getElementById('form-name')?.value.trim() || 'Client';
+      const email = document.getElementById('form-email')?.value.trim() || '';
+      const type = document.getElementById('form-type')?.value || 'Finance / Trading Video';
+      const message = document.getElementById('form-message')?.value.trim() || '';
+
+      const subject = `Video Project Inquiry: ${type} — ${name}`;
+      const fullText = `Hi Warish,\n\nName: ${name}\nEmail: ${email}\nProject Type: ${type}\n\nProject Scope & Vision:\n${message}\n\nLooking forward to speaking with you!`;
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=Rajwarish38@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullText)}`;
+      const mailtoUrl = `mailto:Rajwarish38@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullText)}`;
+
+      // Synchronously open Gmail in response to user click (never blocked by browser popup blockers)
+      const newWin = window.open(gmailUrl, '_blank');
+      if (!newWin || newWin.closed || typeof newWin.closed === 'undefined') {
+        // Fallback to native mailto if browser has strict popup restrictions
+        window.location.href = mailtoUrl;
+      }
+
+      if (statusEl) {
+        statusEl.style.display = 'block';
+        statusEl.className = 'form-status form-status--success';
+        statusEl.innerHTML = `
+          <div style="display: flex; align-items: flex-start; gap: 10px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <div>
+              <strong style="color: #065f46; font-size: 14.5px;">✓ Inquiry Ready for Warish Raj!</strong>
+              <p style="margin: 4px 0 12px; color: #047857; font-size: 13px; line-height: 1.5;">
+                Your message has been formatted to send directly to <strong>Rajwarish38@gmail.com</strong>. If your email window didn't appear automatically, choose your preferred option below:
+              </p>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <a href="${gmailUrl}" target="_blank" rel="noopener noreferrer" class="btn btn--solid btn--sm" style="font-size: 12px; padding: 7px 14px; text-decoration: none;">Open in Web Gmail &rarr;</a>
+                <a href="${mailtoUrl}" class="btn btn--ghost btn--sm" style="font-size: 12px; padding: 7px 14px; text-decoration: none;">Open Mail App</a>
+                <button type="button" class="btn btn--ghost btn--sm" id="btn-copy-inquiry" style="font-size: 12px; padding: 7px 14px;">Copy Message</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const copyBtn = document.getElementById('btn-copy-inquiry');
+        if (copyBtn) {
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(fullText).then(() => {
+              showToast('✓ Full inquiry copied to clipboard!');
+              copyBtn.textContent = '✓ Copied!';
+            }).catch(() => {
+              showToast('Unable to copy automatically');
+            });
+          });
+        }
+      }
+
+      showToast('✓ Opening message to Rajwarish38@gmail.com...');
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Mobile Navigation
+   -------------------------------------------------------------------------- */
+function initMobileNav() {
+  const toggle = document.querySelector('.mobile-toggle');
+  const drawer = document.getElementById('mobile-nav');
+  const closeBtn = document.getElementById('mobile-nav-close');
+  const navLinks = drawer?.querySelectorAll('.nav-link');
+
+  if (!toggle || !drawer) return;
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    toggle.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    toggle.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function toggleDrawer() {
+    if (drawer.classList.contains('open')) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleDrawer();
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeDrawer();
+    });
+  }
+
+  navLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      closeDrawer();
+    });
+  });
+
+  drawer.addEventListener('click', (e) => {
+    if (e.target === drawer) {
+      closeDrawer();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   7. ScrollSpy Active Nav Link
+   -------------------------------------------------------------------------- */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const navLinks = document.querySelectorAll('.nav-links .nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollPos = window.scrollY + 200;
+
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  }, { passive: true });
+}
+
+/* --------------------------------------------------------------------------
+   8. Apple Fluid Mouse Follower & Specular Spotlight Engine
+   -------------------------------------------------------------------------- */
+function initMouseFollower() {
+  // Gracefully exit on touch devices or if reduced motion is requested
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (isTouch || prefersReduced) return;
+
+  const glow = document.getElementById('cursor-glow');
+  const follower = document.getElementById('cursor-follower');
+  const dot = document.getElementById('cursor-dot');
+  if (!glow && !follower && !dot) return;
+
+  let mouseX = -200, mouseY = -200;
+  let followerX = -200, followerY = -200;
+  let glowX = -200, glowY = -200;
+  let isVisible = false;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!isVisible) {
+      isVisible = true;
+      if (glow) glow.style.opacity = '1';
+      if (follower) follower.style.opacity = '1';
+      if (dot) dot.style.opacity = '1';
+      followerX = mouseX;
+      followerY = mouseY;
+      glowX = mouseX;
+      glowY = mouseY;
+    }
+
+    // Direct cursor dot update for instantaneous responsiveness
+    if (dot) {
+      dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', () => {
+    isVisible = false;
+    if (glow) glow.style.opacity = '0';
+    if (follower) follower.style.opacity = '0';
+    if (dot) dot.style.opacity = '0';
+  });
+
+  document.addEventListener('mouseenter', () => {
+    if (isVisible) {
+      if (glow) glow.style.opacity = '1';
+      if (follower) follower.style.opacity = '1';
+      if (dot) dot.style.opacity = '1';
+    }
+  });
+
+  // 60-120fps fluid Lerp loop for organic spring physics
+  function updatePhysics() {
+    if (isVisible) {
+      // Follower ring with tight fluid spring
+      followerX += (mouseX - followerX) * 0.18;
+      followerY += (mouseY - followerY) * 0.18;
+      if (follower) {
+        follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
+      }
+
+      // Ambient spotlight glow with ultra-soft atmospheric lag
+      glowX += (mouseX - glowX) * 0.07;
+      glowY += (mouseY - glowY) * 0.07;
+      if (glow) {
+        glow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0)`;
+      }
+    }
+    requestAnimationFrame(updatePhysics);
+  }
+  requestAnimationFrame(updatePhysics);
+
+  // Magnetic interactive hover detection
+  const interactiveSelector = 'a, button, .work-item, .brand-card, .service-card, .filter-btn, input, textarea, select, [tabindex="0"], .copy-btn';
+
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactiveSelector)) {
+      follower?.classList.add('is-hovering');
+      dot?.classList.add('is-hovering');
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactiveSelector)) {
+      follower?.classList.remove('is-hovering');
+      dot?.classList.remove('is-hovering');
+    }
+  });
+
+  // Elastic compression on click
+  document.addEventListener('mousedown', () => {
+    follower?.classList.add('is-active');
+  });
+
+  document.addEventListener('mouseup', () => {
+    follower?.classList.remove('is-active');
+  });
+}
+
+/* --------------------------------------------------------------------------
+   8. High-Quality Background Video Autoplay & Motion Engine
+   -------------------------------------------------------------------------- */
+function initBackgroundVideo() {
+  const videos = document.querySelectorAll('.bg-video');
+  if (!videos.length) return;
+
+  videos.forEach(video => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.autoplay = true;
+    video.loop = true;
+    video.playbackRate = 1.0;
+
+    const playVideo = () => {
+      const p = video.play();
+      if (p !== undefined && typeof p.catch === 'function') {
+        p.catch(() => {
+          const resume = () => {
+            video.play();
+            ['pointerdown', 'touchstart', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
+              window.removeEventListener(evt, resume);
+            });
+          };
+          ['pointerdown', 'touchstart', 'scroll', 'mousemove', 'keydown'].forEach(evt => {
+            window.addEventListener(evt, resume, { once: true, passive: true });
+          });
+        });
+      }
+    };
+
+    if (video.readyState >= 2) {
+      playVideo();
+    } else {
+      video.addEventListener('loadeddata', playVideo, { once: true });
+      video.addEventListener('canplay', playVideo, { once: true });
+      playVideo();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && video.paused) {
+        playVideo();
+      }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Private Admin Access Shortcuts (Hidden from Public Visitors)
+   1. Keyboard shortcut: Press Ctrl + Shift + A (or Cmd + Shift + A on Mac)
+   2. Secret Logo Trigger: Click topbar logo 3 times rapidly
+   -------------------------------------------------------------------------- */
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+    e.preventDefault();
+    window.location.href = 'admin.html';
+  }
+});
+
+let logoClicks = 0;
+let logoTimer = null;
+const logoEl = document.querySelector('.brand-mark');
+if (logoEl) {
+  logoEl.addEventListener('click', (e) => {
+    logoClicks++;
+    clearTimeout(logoTimer);
+    if (logoClicks >= 3) {
+      e.preventDefault();
+      logoClicks = 0;
+      window.location.href = 'admin.html';
+    } else {
+      logoTimer = setTimeout(() => { logoClicks = 0; }, 800);
+    }
+  });
+}
+

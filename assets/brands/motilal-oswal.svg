@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <circle cx="20" cy="20" r="12" stroke="#d97706" stroke-width="2.5"/>
+  <path d="M16 16 L20 24 L24 16" stroke="#d97706" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="42" y="25" fill="#0f172a" font-family="-apple-system, 'SF Pro Display', sans-serif" font-weight="700" font-size="14" letter-spacing="0.8">MOTILAL OSWAL</text>
+</svg>

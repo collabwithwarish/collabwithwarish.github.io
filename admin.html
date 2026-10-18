@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>Portfolio Studio Manager (Private)</title>
+  <link rel="icon" type="image/png" href="assets/vfx-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root {
+      --admin-primary: #2f6df3;
+      --admin-dark: #0a0e1a;
+      --admin-border: rgba(10, 14, 26, 0.08);
+      --admin-bg: #f8fafc;
+    }
+    body {
+      background: #f1f5f9;
+      color: #0a0e1a;
+      font-family: var(--font-main);
+      padding: 0;
+      margin: 0;
+    }
+    .admin-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .admin-header {
+      background: #ffffff;
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-xl);
+      padding: 28px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 28px;
+    }
+    .admin-title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .admin-badge {
+      background: #eff6ff;
+      color: #2f6df3;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .admin-tabs {
+      display: flex;
+      gap: 8px;
+      background: #ffffff;
+      padding: 6px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--admin-border);
+      margin-bottom: 28px;
+      width: fit-content;
+    }
+    .admin-tab {
+      padding: 10px 22px;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: transparent;
+      color: #64748b;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .admin-tab.active {
+      background: #0a0e1a;
+      color: #ffffff;
+    }
+    .admin-card {
+      background: #ffffff;
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+    }
+    .admin-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .admin-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-field label {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #64748b;
+    }
+    .form-field input, .form-field textarea, .form-field select {
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid #cbd5e1;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s ease;
+      background: #ffffff;
+    }
+    .form-field input:focus, .form-field textarea:focus {
+      border-color: #2f6df3;
+      box-shadow: 0 0 0 3px rgba(47, 109, 243, 0.12);
+    }
+    .project-editor-card {
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 20px;
+      background: #f8fafc;
+      transition: all 0.2s ease;
+    }
+    .project-editor-card:hover {
+      background: #ffffff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+    .project-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .project-key {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: #e2e8f0;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      color: #334155;
+    }
+    .btn-save-bar {
+      position: sticky;
+      bottom: 24px;
+      background: rgba(10, 14, 26, 0.9);
+      backdrop-filter: blur(16px);
+      padding: 16px 28px;
+      border-radius: var(--radius-pill);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #ffffff;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      z-index: 100;
+      margin-top: 32px;
+    }
+    .btn-action {
+      background: #2f6df3;
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-action:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+    .btn-reset {
+      background: transparent;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-pill);
+      padding: 8px 18px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .btn-reset:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    .status-toast {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 13.5px;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+      display: none;
+      z-index: 9999;
+    }
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(20px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .login-box {
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Password Security Shield -->
+  <div class="login-overlay" id="login-overlay">
+    <div class="login-box">
+      <img src="assets/vfx-logo.png" alt="Warish Raj" style="height: 48px; margin-bottom: 16px;">
+      <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 8px;">Studio Admin Panel</h2>
+      <p style="font-size: 14px; color: #64748b; margin-bottom: 24px;">Enter your admin passcode to customize and edit your portfolio in real time.</p>
+      
+      <form id="admin-login-form">
+        <input type="password" id="admin-passcode" placeholder="Enter admin passcode" style="width: 100%; box-sizing: border-box; padding: 14px 18px; border-radius: var(--radius-pill); border: 1.5px solid #cbd5e1; font-size: 15px; margin-bottom: 16px; outline: none; text-align: center;">
+        <button type="submit" class="btn-action" style="width: 100%; justify-content: center; padding: 14px;">
+          Unlock Editor
+        </button>
+        <p style="font-size: 12px; color: #94a3b8; margin-top: 14px;">Default Passcode: <strong>admin123</strong> (changeable inside)</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="admin-container">
+    
+    <!-- Top Bar -->
+    <header class="admin-header">
+      <div>
+        <h1 class="admin-title">
+          <img src="assets/vfx-logo.png" alt="Logo" style="height: 32px;">
+          <span>Portfolio Studio Manager</span>
+          <span class="admin-badge">LIVE EDITOR</span>
+        </h1>
+        <p style="margin: 6px 0 0; font-size: 13.5px; color: #64748b;">Instantly change videos, text, services, contact links, and bio without editing code.</p>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="index.html" target="_blank" style="text-decoration: none; font-weight: 600; font-size: 13.5px; color: #2f6df3; padding: 8px 16px; background: #eff6ff; border-radius: var(--radius-pill);">
+          View Live Website ↗
+        </a>
+        <button id="admin-lock-btn" style="border: 1px solid #cbd5e1; background: #ffffff; border-radius: var(--radius-pill); padding: 8px 16px; font-size: 13px; font-weight: 600; cursor: pointer;">
+          Lock Panel
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="tab-videos">Projects & Videos (YouTube / Google Drive)</button>
+      <button class="admin-tab" data-tab="tab-homepage">Homepage & Hero Copy</button>
+      <button class="admin-tab" data-tab="tab-services">Services Offered</button>
+      <button class="admin-tab" data-tab="tab-about">About Warish</button>
+      <button class="admin-tab" data-tab="tab-settings">Security & Passcode</button>
+    </div>
+
+    <!-- TAB 1: Projects & Videos -->
+    <div class="tab-pane" id="tab-videos">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Selected Projects & Video Embeds</h2>
+            <p style="font-size: 13px; color: #64748b; margin: 4px 0 0;">Paste YouTube URLs or Google Drive share links. All videos play directly inside the website lightbox.</p>
+          </div>
+          <button id="btn-export-json" class="btn-reset" style="color: #0a0e1a; border-color: #cbd5e1;">Export Backup (JSON)</button>
+        </div>
+
+        <div id="projects-editor-list">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Homepage & Hero -->
+    <div class="tab-pane" id="tab-homepage" style="display: none;">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">Hero Section & Status</h2>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-field">
+            <label>Availability Badge Text</label>
+            <input type="text" id="setting-badge" value="Available for projects">
+          </div>
+          <div class="form-field">
+            <label>Hero Title Accent Word</label>
+            <input type="text" id="setting-hero-accent" value="scale">
+          </div>
+        </div>
+
+        <div class="form-field" style="margin-bottom: 20px;">
+          <label>Hero Subtitle</label>
+          <textarea id="setting-hero-sub" rows="3">Explainer videos, high-retention reels, YouTube documentaries, and podcast mastercuts.</textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>Primary Direct Email</label>
+            <input type="email" id="setting-email" value="Rajwarish38@gmail.com">
+          </div>
+          <div class="form-field">
+            <label>WhatsApp Number (Country code included)</label>
+            <input type="text" id="setting-whatsapp" value="919905657907">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Services Offered -->
+    <div class="tab-pane" id="tab-services" style="display: none;">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">Services Offered (5 Cards)</h2>
+        </div>
+        <div id="services-editor-list">
+          <!-- Dynamically populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: About Warish -->
+    <div class="tab-pane" id="tab-about" style="display: none;">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">About Page Biography & Career</h2>
+        </div>
+        <div class="form-field" style="margin-bottom: 20px;">
+          <label>Lead Bio Paragraph</label>
+          <textarea id="setting-about-lead" rows="4">I am a video editor and visual storyteller editing professionally since 2022. I specialize in high-retention video production for YouTube creators, documentary explainers, podcasts, and social media.</textarea>
+        </div>
+        <div class="form-field" style="margin-bottom: 20px;">
+          <label>Current Role & Agency</label>
+          <input type="text" id="setting-about-role" value="Full-time Video Editor at Postverse Media">
+        </div>
+        <div class="form-field">
+          <label>Editorial Philosophy Statement</label>
+          <textarea id="setting-about-philosophy" rows="5">Digital video content often gets lost in two extremes: either dry, unengaging recordings or chaotic, over-edited meme montages that distract the viewer. My editorial philosophy focuses on what truly matters: audience comprehension, emotional pacing, and Apple-grade visual polish.</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: Security & Passcode -->
+    <div class="tab-pane" id="tab-settings" style="display: none;">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">Panel Security</h2>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Change Admin Passcode</label>
+            <input type="password" id="setting-new-pass" placeholder="Enter new passcode">
+          </div>
+          <div class="form-field">
+            <label>Confirm Passcode</label>
+            <input type="password" id="setting-confirm-pass" placeholder="Confirm new passcode">
+          </div>
+        </div>
+        <button id="btn-update-pass" class="btn-action" style="background: #0a0e1a;">
+          Update Passcode
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating Sticky Save Bar -->
+    <div class="btn-save-bar">
+      <div>
+        <strong>Changes ready to save</strong>
+        <span style="font-size: 13px; color: #94a3b8; display: block;">Saves instantly to your browser storage and updates the portfolio in real-time.</span>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <button id="btn-reset-defaults" class="btn-reset">Reset to Factory Defaults</button>
+        <button id="btn-save-all" class="btn-action">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Save All Changes
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="status-toast" id="status-toast">
+    ✓ Changes saved successfully!
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-reel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0fdf4"/>
+    </linearGradient>
+    <filter id="glass-shadow-reel" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg-reel)"/>
+
+  <!-- Clean iPhone Mockup Frame -->
+  <rect x="540" y="80" width="220" height="440" rx="36" fill="#ffffff" stroke="#e2e8f0" stroke-width="3" filter="url(#glass-shadow-reel)"/>
+  <rect x="556" y="104" width="188" height="392" rx="22" fill="#f8fafc"/>
+  
+  <!-- Subtle Subtitle Card -->
+  <rect x="572" y="420" width="156" height="36" rx="10" fill="#0f172a" fill-opacity="0.9"/>
+  <text x="650" y="443" text-anchor="middle" fill="#ffffff" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">The Power of Stillness</text>
+
+  <circle cx="650" cy="280" r="28" fill="#16a34a"/>
+  <polygon points="646,270 658,280 646,290" fill="#ffffff"/>
+
+  <!-- Glass Callout -->
+  <g filter="url(#glass-shadow-reel)">
+    <rect x="140" y="120" width="360" height="110" rx="20" fill="#ffffff" fill-opacity="0.9" stroke="#ffffff" stroke-width="2"/>
+    <text x="170" y="160" fill="#16a34a" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">SHORT-FORM PACING</text>
+    <text x="170" y="195" fill="#0f172a" font-family="-apple-system, sans-serif" font-size="22" font-weight="700">Substance Over Chaos</text>
+  </g>
+
+  <text x="140" y="640" fill="#0f172a" font-family="-apple-system, sans-serif" font-size="34" font-weight="700">Story-Driven Vertical Reels & Creator Shorts</text>
+  <text x="140" y="675" fill="#64748b" font-family="-apple-system, sans-serif" font-size="16">Hook retention achieved through clear narrative progression rather than dizzying sound effects</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-f2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <filter id="glass-shadow-f2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg-f2)"/>
+
+  <!-- Editorial Pillars -->
+  <g opacity="0.9">
+    <rect x="260" y="340" width="60" height="220" rx="14" fill="#e2e8f0"/>
+    <rect x="380" y="270" width="60" height="290" rx="14" fill="#bfdbfe"/>
+    <rect x="500" y="200" width="60" height="360" rx="14" fill="#3b82f6"/>
+    <rect x="620" y="310" width="60" height="250" rx="14" fill="#e2e8f0"/>
+    <rect x="740" y="160" width="60" height="400" rx="14" fill="#2563eb"/>
+    <rect x="860" y="240" width="60" height="320" rx="14" fill="#93c5fd"/>
+    <rect x="980" y="120" width="60" height="440" rx="14" fill="#1d4ed8"/>
+  </g>
+
+  <!-- Glass Callout -->
+  <g filter="url(#glass-shadow-f2)">
+    <rect x="180" y="90" width="460" height="110" rx="20" fill="#ffffff" fill-opacity="0.9" stroke="#ffffff" stroke-width="2"/>
+    <text x="210" y="130" fill="#0284c7" font-family="-apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">MARKET STORYTELLING</text>
+    <text x="210" y="165" fill="#0f172a" font-family="-apple-system, sans-serif" font-size="22" font-weight="700">Translating Numbers into Narrative</text>
+  </g>
+
+  <text x="180" y="635" fill="#0f172a" font-family="-apple-system, sans-serif" font-size="34" font-weight="700">Mid-Cap vs Small-Cap Funds: Risk & Alpha Decoded</text>
+  <text x="180" y="670" fill="#64748b" font-family="-apple-system, sans-serif" font-size="16">Framing market volatility as a compelling educational story rather than boring charts</text>
+</svg>
