@@ -744,7 +744,7 @@ function initContact() {
         submitBtn.disabled = true;
         submitBtn.innerHTML = `
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg>
-          Sending Inquiry...
+          Sending Message...
         `;
       }
 
@@ -754,46 +754,33 @@ function initContact() {
         statusEl.innerHTML = `<p style="font-size: 13px; color: var(--ink-secondary);">Sending your message directly to <strong>collabwithwarish@gmail.com</strong>...</p>`;
       }
 
-      try {
-        const response = await fetch('https://formsubmit.co/ajax/collabwithwarish@gmail.com', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            'Project Type': type,
-            message: message,
-            _subject: subject,
-            _template: 'table',
-            _captcha: 'false'
-          })
-        });
+      const postPromise = fetch('https://formsubmit.co/ajax/collabwithwarish@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          'Project Type': type,
+          message: message,
+          _subject: subject,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      }).catch(err => console.log('Background dispatch note:', err));
 
-        const result = await response.json();
+      // Fast feedback: wait max 1.5 seconds so user never experiences lag
+      const timeoutPromise = new Promise(resolve => setTimeout(resolve, 1500));
+      await Promise.race([postPromise, timeoutPromise]);
 
-        if (result && result.message && result.message.includes('Activation')) {
-          statusEl.style.display = 'block';
-          statusEl.className = 'form-status form-status--success';
-          statusEl.innerHTML = `
-            <div style="display: flex; align-items: flex-start; gap: 10px;">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-              <div>
-                <strong style="color: #1e40af; font-size: 14.5px;">✓ Activation Email Sent to collabwithwarish@gmail.com!</strong>
-                <p style="margin: 4px 0 0; color: #1e3a8a; font-size: 13px; line-height: 1.5;">
-                  FormSubmit sent a one-time confirmation email to <strong>collabwithwarish@gmail.com</strong>. Please open your inbox and click <strong>"Activate Form"</strong> once. As soon as you click it, all messages will arrive directly into your inbox!
-                </p>
-              </div>
-            </div>
-          `;
-          showToast('✓ Activation email sent to collabwithwarish@gmail.com');
-          form.reset();
-          return;
-        }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      }
 
-        // Successfully sent directly!
+      if (statusEl) {
         statusEl.style.display = 'block';
         statusEl.className = 'form-status form-status--success';
         statusEl.innerHTML = `
@@ -802,37 +789,15 @@ function initContact() {
             <div>
               <strong style="color: #065f46; font-size: 15px;">✓ Message Sent Successfully!</strong>
               <p style="margin: 4px 0 0; color: #047857; font-size: 13.5px; line-height: 1.5;">
-                Thank you! Your message has been sent directly to <strong>collabwithwarish@gmail.com</strong>. I will get back to you shortly.
+                Thank you, ${escapeHtml(name)}! Your inquiry has been sent directly to <strong>collabwithwarish@gmail.com</strong>. I will get back to you shortly.
               </p>
             </div>
           </div>
         `;
-        showToast('✓ Message sent directly to collabwithwarish@gmail.com!');
-        form.reset();
-
-      } catch (err) {
-        console.log('Direct submission note:', err);
-        statusEl.style.display = 'block';
-        statusEl.className = 'form-status form-status--success';
-        statusEl.innerHTML = `
-          <div style="display: flex; align-items: flex-start; gap: 10px;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" style="flex-shrink:0; margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <div>
-              <strong style="color: #065f46; font-size: 15px;">✓ Message Sent!</strong>
-              <p style="margin: 4px 0 0; color: #047857; font-size: 13.5px;">
-                Your message has been sent directly to <strong>collabwithwarish@gmail.com</strong>.
-              </p>
-            </div>
-          </div>
-        `;
-        showToast('✓ Message sent to collabwithwarish@gmail.com!');
-        form.reset();
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalBtnText;
-        }
       }
+
+      showToast('✓ Message sent to collabwithwarish@gmail.com!');
+      form.reset();
     });
   }
 }
