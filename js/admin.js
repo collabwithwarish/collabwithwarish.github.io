@@ -53,6 +53,15 @@ const DEFAULT_PROJECTS = {
     desc: 'An educational investment guide edited for Invesco Mutual Fund. Simplifying short-term debt allocation, liquid funds, and capital preservation with clear visual comparisons and conversational pacing.',
     videoUrl: 'https://www.youtube.com/watch?v=3bduQgeKAAM'
   },
+  'shivohaam-kalki': {
+    title: 'KALKI आ चुके हैं — 2032 में Satyug शुरू होगा',
+    category: 'Podcast Mastercut',
+    tag: 'Podcast Mastercut • Viral',
+    client: 'Shivohaam & Vrindda (Body, Mind & Beyond)',
+    role: 'Lead Podcast Editor, Reaction Pacing & Sound Design',
+    desc: 'High-impact podcast episode edited for Shivohaam & Vrindda. **This video crossed 3 Million+ views on Instagram in just 2 days.** Edited with high-retention conversational pacing, suspense hooks, dynamic multi-camera reaction timing, and atmospheric background score leveling.',
+    videoUrl: 'https://www.youtube.com/watch?v=t_wZTZ2-Z1Y'
+  },
   'finance-funds': {
     title: '3 Things to Avoid When Setting Up a Family Office',
     category: 'YouTube Documentary',

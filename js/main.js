@@ -309,6 +309,23 @@ const projectsData = {
     videoUrl: 'https://www.youtube.com/watch?v=3bduQgeKAAM',
     startTime: 0
   },
+  'shivohaam-kalki': {
+    title: 'KALKI आ चुके हैं — 2032 में Satyug शुरू होगा',
+    category: 'Podcast Mastercut',
+    tag: 'Podcast Mastercut • Viral',
+    client: 'Shivohaam & Vrindda (Body, Mind & Beyond)',
+    role: 'Lead Podcast Editor, Reaction Pacing & Sound Design',
+    desc: 'High-impact podcast episode edited for Shivohaam & Vrindda. **This video crossed 3 Million+ views on Instagram in just 2 days.** Edited with high-retention conversational pacing, suspense hooks, dynamic multi-camera reaction timing, and atmospheric background score leveling.',
+    topics: [
+      '**Crossed 3 Million+ views on Instagram in just 2 days**',
+      'Suspense-driven conversational hook and dynamic opening retention engineering',
+      'Multi-camera dialogue timing and listener reaction cutting',
+      'Atmospheric background score leveling and broadcast audio mastering'
+    ],
+    image: 'assets/projects/shivohaam-kalki.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=t_wZTZ2-Z1Y',
+    startTime: 0
+  },
   'finance-funds': {
     title: '3 Things to Avoid When Setting Up a Family Office',
     category: 'YouTube Documentary',
@@ -540,7 +557,7 @@ function initLightbox() {
     const roleEl = document.getElementById('lightbox-role');
 
     if (titleEl) titleEl.textContent = data.title;
-    if (descEl) descEl.textContent = data.desc;
+    if (descEl) descEl.innerHTML = (data.desc || '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     if (catEl) catEl.textContent = data.category;
     if (clientEl) clientEl.textContent = data.client;
     if (roleEl) roleEl.textContent = data.role;
@@ -551,7 +568,7 @@ function initLightbox() {
       if (data.topics && data.topics.length) {
         data.topics.forEach(t => {
           const li = document.createElement('li');
-          li.textContent = t;
+          li.innerHTML = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
           topicsList.appendChild(li);
         });
       }
