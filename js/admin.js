@@ -73,15 +73,25 @@ const DEFAULT_PROJECTS = {
     desc: 'A high-impact wealth management and family office masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
     videoUrl: 'https://www.youtube.com/watch?v=9J-Zbk6ItEQ'
   },
-  'podcast-reels': {
-    title: 'High-Retention Finance Reels & Creator Shorts',
-    category: 'Podcast & Reels',
+  'invesco-categories-reel': {
+    title: 'Mutual Fund Categories to Look for in 2026',
+    category: 'Short-Form Reel',
     year: '2024–2025',
-    tag: 'Short-Form Retention',
-    client: 'Independent Shows & Social Creators',
-    role: 'Hook Crafting, Retention Flow & Emotional Resonance',
-    desc: 'Achieving 85%+ retention through genuine story hooks and conceptual payoff rather than chaotic screen-shaking effects. Minimalist Apple-style subtitles and purposeful match cuts tailored for creators.',
-    videoUrl: 'https://www.youtube.com/watch?v=hZ8G14A633E'
+    tag: 'Short-Form Reel • 9:16',
+    client: 'Invesco Mutual Fund',
+    role: 'Hook Crafting, Kinetic Subtitles & Pacing',
+    desc: 'High-retention vertical financial reel crafted for Invesco Mutual Fund. Retention-engineered 3-second hook, minimalist kinetic typography, and fast-paced asset category breakdown designed for vertical mobile feeds.',
+    videoUrl: 'https://youtube.com/shorts/U-Ek8qG2-IY'
+  },
+  'podcast-reels': {
+    title: 'Mutual Fund Categories to Look for in 2026',
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'Invesco Mutual Fund',
+    role: 'Hook Crafting, Kinetic Subtitles & Pacing',
+    desc: 'High-retention vertical financial reel crafted for Invesco Mutual Fund. Retention-engineered 3-second hook, minimalist kinetic typography, and fast-paced asset category breakdown designed for vertical mobile feeds.',
+    videoUrl: 'https://youtube.com/shorts/U-Ek8qG2-IY'
   },
   'podcast-founders': {
     title: 'The Founder & Creator Journey: Multi-Cam Mastercut',

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v4.3';
+  const DATA_VERSION = 'v4.4';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -345,23 +345,41 @@ const projectsData = {
     videoUrl: 'https://www.youtube.com/watch?v=9J-Zbk6ItEQ',
     startTime: 0
   },
-  'podcast-reels': {
-    title: 'Story-Driven Vertical Reels & Creator Shorts',
-    category: 'Podcast & Reels',
+  'invesco-categories-reel': {
+    title: 'Mutual Fund Categories to Look for in 2026',
+    category: 'Short-Form Reel',
     year: '2024–2025',
-    tag: 'Short-Form Narrative',
-    client: 'Independent Shows & Social Creators',
-    role: 'Hook Crafting, Retention Flow & Emotional Resonance',
-    desc: 'Short-form content frequently suffers from gimmick overload — flashing colors and deafening sound effects that trigger fatigue. My approach proves that retention is built on story structure: opening with an intriguing premise, building curiosity across 15 seconds, and delivering a meaningful payoff. This delivers 85%+ retention through genuine substance.',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'Invesco Mutual Fund',
+    role: 'Hook Crafting, Kinetic Subtitles & Pacing',
+    desc: 'High-retention vertical financial reel crafted for Invesco Mutual Fund. Retention-engineered 3-second hook, minimalist kinetic typography, and fast-paced asset category breakdown designed for vertical mobile feeds.',
     topics: [
-      '3-second storytelling hooks rooted in intrigue rather than panic',
-      'Elegant, legible kinetic subtitles styled with Apple-grade minimalism',
-      'Seamless match cuts that keep the viewer subconsciously engaged',
-      'Respectful pacing tailored for intelligent audiences'
+      'High-retention 3-second opening hook holding attention on mobile feeds',
+      'Minimalist kinetic subtitles styled with Apple-grade typography',
+      'Fast-paced category segmentation delivering value in under 45 seconds',
+      'Dynamic sound effects, punchy match cuts, and audio balancing'
     ],
-    image: 'assets/projects/podcast-reels.svg',
-    // 👇 REPLACE WITH YOUR ACTUAL YOUTUBE URL
-    videoUrl: 'https://www.youtube.com/watch?v=hZ8G14A633E'
+    image: 'assets/projects/invesco-categories-reel.jpg',
+    videoUrl: 'https://youtube.com/shorts/U-Ek8qG2-IY',
+    startTime: 0
+  },
+  'podcast-reels': {
+    title: 'Mutual Fund Categories to Look for in 2026',
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'Invesco Mutual Fund',
+    role: 'Hook Crafting, Kinetic Subtitles & Pacing',
+    desc: 'High-retention vertical financial reel crafted for Invesco Mutual Fund. Retention-engineered 3-second hook, minimalist kinetic typography, and fast-paced asset category breakdown designed for vertical mobile feeds.',
+    topics: [
+      'High-retention 3-second opening hook holding attention on mobile feeds',
+      'Minimalist kinetic subtitles styled with Apple-grade typography',
+      'Fast-paced category segmentation delivering value in under 45 seconds',
+      'Dynamic sound effects, punchy match cuts, and audio balancing'
+    ],
+    image: 'assets/projects/invesco-categories-reel.jpg',
+    videoUrl: 'https://youtube.com/shorts/U-Ek8qG2-IY',
+    startTime: 0
   },
   'podcast-founders': {
     title: 'The Founder’s Journey: Multi-Cam Podcast Mastercut',
