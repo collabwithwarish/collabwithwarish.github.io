@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Apple UI & Glassmorphism Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=5.0">
+  <link rel="stylesheet" href="css/style.css?v=7.0">
 </head>
 <body>
 
@@ -44,38 +44,66 @@
 
     <!-- 1. Hero Viewport -->
     <section class="hero-viewport" id="hero">
-      <!-- Topbar with Centered Logo Emblem -->
+      <!-- Topbar: Left Nav & Live Clock, Right Available Status (vfxace style) -->
       <header class="topbar">
-        <div class="topbar__left"></div>
-        <a href="#hero" class="brand-mark" aria-label="Warish Raj Home">
-          <img src="assets/vfx-logo.png" alt="Warish Raj" class="vfx-logo-img">
-        </a>
+        <div class="topbar__left">
+          <a href="#hero" class="nav-item active">Home</a>
+          <a href="#work" class="nav-item">Works</a>
+          <span class="nav-clock" id="local-time"></span>
+        </div>
         <div class="topbar__right">
-          <a href="about.html" class="nav-subtle-pill">About</a>
+          <div class="status-indicator">
+            <span class="status-dot"></span>
+            <span class="status-text">Available</span>
+          </div>
         </div>
       </header>
 
       <div class="hero__inner">
-        <!-- Status Capsule -->
-        <div class="badge">
-          <span class="badge__dot"></span>
-          <span class="badge__text">Available for projects</span>
+        <!-- Figma Vector Canvas Graphic Accents -->
+        <div class="canvas-accents" aria-hidden="true">
+          <!-- Left: Dotted/dashed selection bounding box with purple corner anchor handles -->
+          <div class="canvas-accent-box">
+            <span class="accent-handle handle-tl"></span>
+            <span class="accent-handle handle-tr"></span>
+            <span class="accent-handle handle-bl"></span>
+            <span class="accent-handle handle-br"></span>
+          </div>
+
+          <!-- Right: Blueprint grid with corner purple anchor handles -->
+          <div class="canvas-accent-grid">
+            <span class="accent-handle handle-tr"></span>
+            <span class="accent-handle handle-bl"></span>
+          </div>
         </div>
 
         <div class="hero__center">
-          <h1 class="hero__title">
-            Visuals that <em class="accent-scale">scale</em>
+          <h1 class="hero__headline">
+            Hey, I’m <span class="inline-badge inline-badge--avatar"><img src="assets/badge-avatar.svg" alt="Warish" class="badge-img"></span> Warish, a storyteller<br>
+            based in <span class="inline-badge inline-badge--india"><img src="assets/badge-india.svg" alt="India" class="badge-img"></span> India
           </h1>
+
           <p class="hero__subtitle">
-            High-retention video editor for creators and ambitious brands.
+            I make launch videos and explainers
           </p>
 
           <div class="hero__actions">
-            <a href="#work" class="btn btn--solid">
-              <span>View work</span>
+            <a href="#contact" class="btn-reach-out">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              <span>Reach out</span>
             </a>
-            <a href="#contact" class="btn btn--ghost">
-              <span>Get in touch</span>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="btn-icon-square" aria-label="Twitter / X">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/warish-raj-075b31278" target="_blank" rel="noopener noreferrer" class="btn-icon-square" aria-label="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 1 0 0-3.05 1.53 1.53 0 0 0 0 3.05m1.39 9.74v-8.37H5.07v8.37z"/>
+              </svg>
             </a>
           </div>
         </div>
@@ -780,6 +808,6 @@
   </div>
 
   <!-- Main JavaScript Engine -->
-  <script src="js/main.js?v=6.5"></script>
+  <script src="js/main.js?v=7.0"></script>
 </body>
 </html>

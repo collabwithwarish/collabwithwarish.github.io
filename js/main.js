@@ -27,7 +27,7 @@ function applyDynamicSettings() {
 
   const settings = JSON.parse(localStorage.getItem('warish_settings'));
   if (settings) {
-    const badgeText = document.querySelector('.badge__text');
+    const badgeText = document.querySelector('.status-text') || document.querySelector('.badge__text');
     if (badgeText && settings.badge) badgeText.textContent = settings.badge;
 
     const heroSub = document.querySelector('.hero__subtitle');
@@ -89,7 +89,7 @@ function getActiveProjectsData() {
 }
 
 /* --------------------------------------------------------------------------
-   1. Live Studio Clock (IST)
+   1. Live Studio Clock (IST) — Formatted: HH:mm – ddd, MMM D (vfxace style)
    -------------------------------------------------------------------------- */
 function initClock() {
   const timeEl = document.getElementById('local-time');
@@ -97,18 +97,24 @@ function initClock() {
 
   function update() {
     const now = new Date();
-    const options = {
-      timeZone: 'Asia/Kolkata',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true
-    };
     try {
-      const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
-      timeEl.textContent = `${timeString} IST`;
+      const timePart = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }).format(now);
+
+      const datePart = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Kolkata',
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric'
+      }).format(now);
+
+      timeEl.textContent = `${timePart} – ${datePart}`;
     } catch (e) {
-      timeEl.textContent = now.toLocaleTimeString() + ' IST';
+      timeEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
     }
   }
 

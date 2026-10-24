@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 34" width="44" height="34" fill="none">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#93c5fd" />
+      <stop offset="100%" stop-color="#bfdbfe" />
+    </linearGradient>
+    <clipPath id="squircleClip">
+      <rect width="44" height="34" rx="9" ry="9" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#squircleClip)">
+    <rect width="44" height="34" fill="url(#skyGrad)" />
+    <!-- Stylized Person Silhouette (matching vfxace avatar badge) -->
+    <!-- Head -->
+    <circle cx="22" cy="14" r="6.2" fill="#0f172a" />
+    <!-- Hair profile -->
+    <path d="M15.8 14.5 C15.5 10.5 18 7.5 22 7.5 C26 7.5 28.5 10 28.2 14 C27 12 25 11 22 11 C18.5 11 16.5 12.5 15.8 14.5 Z" fill="#0f172a" />
+    <!-- Neck -->
+    <path d="M20 18 H24 V22 H20 Z" fill="#0f172a" />
+    <!-- Shoulders & Torso -->
+    <path d="M10 34 C10 25 14 22 22 22 C30 22 34 25 34 34 Z" fill="#0f172a" />
+  </g>
+</svg>
