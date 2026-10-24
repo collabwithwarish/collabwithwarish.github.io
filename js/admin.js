@@ -15,22 +15,22 @@ const DEFAULT_PASS = 'admin123';
 const DEFAULT_PROJECTS = {
   'finavenue-construction': {
     title: "The ₹4,700 Cr Market Hiding Behind India's Construction Boom",
-    category: 'YouTube Documentary',
+    category: 'Podcast Mastercut',
     year: '2024–2025',
-    tag: 'Documentary Explainer',
+    tag: 'Podcast & Interview Mastercut',
     client: 'Finavenue',
     role: 'Editorial Story Flow, Data Motion Graphics & Sound Design',
-    desc: 'An industry documentary exploring India’s massive construction and infrastructure supply chain. Engineered with high-retention narrative hooks, kinetic data visualizations, and cinematic pacing that demystifies a multi-billion dollar market without cognitive overload.',
+    desc: 'High-retention conversational business podcast and market analysis edited for Finavenue. Paced with dynamic multi-camera reaction timing, kinetic data graphics, and story-driven retention starting right from the core conflict.',
     videoUrl: 'https://www.youtube.com/watch?v=NGz3-gmqQto&t=5s'
   },
   'motilal-family-office': {
     title: '3 Things to Avoid When Setting Up a Family Office',
-    category: 'YouTube Documentary',
+    category: 'Podcast Mastercut',
     year: '2024–2025',
-    tag: 'Market & Wealth Storytelling',
+    tag: 'Podcast Mastercut • Family Office',
     client: 'Motilal Oswal AMC',
-    role: 'Editorial Story Flow, Kinetic Graphics & Sound Pacing',
-    desc: 'A high-impact wealth management and family office masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
+    role: 'Lead Podcast Editor, Kinetic Graphics & Reaction Pacing',
+    desc: 'A high-impact wealth management and family office podcast masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp conversational pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
     videoUrl: 'https://www.youtube.com/watch?v=9J-Zbk6ItEQ'
   },
   'icici-market-analysis': {
@@ -44,13 +44,13 @@ const DEFAULT_PROJECTS = {
     videoUrl: 'https://www.youtube.com/watch?v=qr7FplzumYY'
   },
   'invesco-parking-money': {
-    title: 'Where Should You Park Money for 6 Months or More?',
-    category: 'YouTube Documentary',
+    title: 'Where to Park Money for 6+ Months?',
+    category: 'Podcast Mastercut',
     year: '2024–2025',
-    tag: 'Investor Education & Debt',
+    tag: 'Podcast Mastercut • Investor Education',
     client: 'Invesco Mutual Fund',
-    role: 'Editorial Story Flow, Clean Data Graphics & Pacing',
-    desc: 'An educational investment guide edited for Invesco Mutual Fund. Simplifying short-term debt allocation, liquid funds, and capital preservation with clear visual comparisons and conversational pacing.',
+    role: 'Podcast Dialogue Editing, Clean Data Graphics & Pacing',
+    desc: 'Investor education podcast interview and breakdown edited for Invesco Mutual Fund. Simplifying short-term debt allocation, liquid funds, and capital preservation with clear visual comparisons and natural conversational pacing.',
     videoUrl: 'https://www.youtube.com/watch?v=3bduQgeKAAM'
   },
   'shivohaam-kalki': {

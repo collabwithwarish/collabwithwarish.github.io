@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v4.5';
+  const DATA_VERSION = 'v5.6';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -239,16 +239,16 @@ function getYouTubeEmbedUrl(url, startTime = 0) {
 const projectsData = {
   'finavenue-construction': {
     title: "The ₹4,700 Cr Market Hiding Behind India's Construction Boom",
-    category: 'YouTube Documentary',
+    category: 'Podcast Mastercut',
     year: '2024–2025',
-    tag: 'Documentary Explainer',
+    tag: 'Podcast & Interview Mastercut',
     client: 'Finavenue',
     role: 'Editorial Story Flow, Data Motion Graphics & Sound Design',
-    desc: 'An industry documentary exploring India’s massive construction and infrastructure supply chain. Engineered with high-retention narrative hooks, kinetic data visualizations, and cinematic pacing that demystifies a multi-billion dollar market without cognitive overload.',
+    desc: 'High-retention conversational business podcast and market analysis edited for Finavenue. Paced with dynamic multi-camera reaction timing, kinetic data graphics, and story-driven retention starting right from the core conflict.',
     topics: [
       'Hook-driven opening starting right at the core conflict (5s start mark)',
+      'Multi-camera dialogue timing and natural interview pacing',
       'Kinetic market data and supply chain motion graphics',
-      'High-retention documentary pacing holding viewer interest across 10+ minutes',
       'Dynamic sound beds and audio mastering that drive narrative momentum'
     ],
     image: 'assets/projects/finavenue-construction.jpg',
@@ -257,16 +257,16 @@ const projectsData = {
   },
   'motilal-family-office': {
     title: '3 Things to Avoid When Setting Up a Family Office',
-    category: 'YouTube Documentary',
+    category: 'Podcast Mastercut',
     year: '2024–2025',
-    tag: 'Market & Wealth Storytelling',
+    tag: 'Podcast Mastercut • Family Office',
     client: 'Motilal Oswal AMC',
-    role: 'Editorial Story Flow, Kinetic Graphics & Sound Pacing',
-    desc: 'A high-impact wealth management and family office masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
+    role: 'Lead Podcast Editor, Kinetic Graphics & Reaction Pacing',
+    desc: 'A high-impact wealth management and family office podcast masterclass edited for Motilal Oswal AMC. Engineered with clean financial data motion graphics, crisp conversational pacing, and engaging narrative structure designed for ultra-high-net-worth investors.',
     topics: [
-      'High-retention corporate storytelling and wealth structuring narrative',
+      'Conversational podcast cutting and wealth structuring narrative',
+      'Multi-camera reaction timing and dialogue clarity',
       'Kinetic financial infographics and institutional data polish',
-      'Strategic visual pacing designed for ultra-high-net-worth investors',
       'Warm vocal balancing, ambient beds, and broadcast-level sound design'
     ],
     image: 'assets/projects/motilal-family-office.jpg',
@@ -292,17 +292,17 @@ const projectsData = {
     startTime: 0
   },
   'invesco-parking-money': {
-    title: 'Where Should You Park Money for 6 Months or More?',
-    category: 'YouTube Documentary',
+    title: 'Where to Park Money for 6+ Months?',
+    category: 'Podcast Mastercut',
     year: '2024–2025',
-    tag: 'Investor Education & Debt',
+    tag: 'Podcast Mastercut • Investor Education',
     client: 'Invesco Mutual Fund',
-    role: 'Editorial Story Flow, Clean Data Graphics & Pacing',
-    desc: 'An educational investment guide edited for Invesco Mutual Fund. Simplifying short-term debt allocation, liquid funds, and capital preservation with clear visual comparisons and conversational pacing.',
+    role: 'Podcast Dialogue Editing, Clean Data Graphics & Pacing',
+    desc: 'Investor education podcast interview and breakdown edited for Invesco Mutual Fund. Simplifying short-term debt allocation, liquid funds, and capital preservation with clear visual comparisons and natural conversational pacing.',
     topics: [
+      'Natural dialogue editing and conversational pacing across complex financial concepts',
       'Simplifying complex debt fund mechanics and short-term capital preservation',
       'Minimalist comparative graphs contrasting fixed deposits with debt instruments',
-      'Engaging editorial flow holding viewer focus across financial education topics',
       'Crisp vocal mastering and subtle acoustic sound beds'
     ],
     image: 'assets/projects/invesco-parking-money.jpg',
