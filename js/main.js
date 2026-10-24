@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v6.1';
+  const DATA_VERSION = 'v6.2';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -469,6 +469,42 @@ const projectsData = {
     ],
     image: 'assets/projects/icici-rbi-bond-sale-reel.jpg',
     videoUrl: 'https://youtube.com/shorts/Z_RnedXcVmU',
+    startTime: 0
+  },
+  'icici-upi-fee-reel': {
+    title: "The New UPI Fee for Merchants | Ft. Sharmila D'Silva",
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Hook Crafting, Kinetic Typography & Pacing',
+    desc: 'High-retention vertical financial reel crafted for ICICI Prudential Mutual Fund. Contrarian fintech hook, Apple-grade kinetic typography, and fast-paced interchange fee breakdown.',
+    topics: [
+      'High-retention 3-second hook explaining digital payment merchant fees',
+      'Kinetic callouts, visual interchange fee comparisons, and clean subtitles',
+      'Fast-paced editorial pacing delivering maximum financial clarity in under 45 seconds',
+      'Dynamic sound effects, punchy match cuts, and vocal balancing'
+    ],
+    image: 'assets/projects/icici-upi-fee-reel.jpg',
+    videoUrl: 'https://youtube.com/shorts/krYRIJBGB7E',
+    startTime: 0
+  },
+  'icici-fii-outflow-reel': {
+    title: "Why Foreign Investors Sold in September | Ft. Sharmila D'Silva",
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Hook Crafting, Kinetic Typography & Pacing',
+    desc: 'High-retention vertical financial reel crafted for ICICI Prudential Mutual Fund. Macroeconomic data hook, dynamic capital flow graphics, and fast-paced institutional selling analysis.',
+    topics: [
+      'High-retention opening hook breaking down institutional market sentiment',
+      'Kinetic capital flow infographics and stock market indices comparisons',
+      'Rapid narrative structure sustaining high viewer retention across vertical feeds',
+      'Crisp sound design, audio leveling, and professional vocal polish'
+    ],
+    image: 'assets/projects/icici-fii-outflow-reel.jpg',
+    videoUrl: 'https://youtube.com/shorts/xIL25pWqEDM',
     startTime: 0
   },
   'podcast-reels': {

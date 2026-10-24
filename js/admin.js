@@ -142,6 +142,26 @@ const DEFAULT_PROJECTS = {
     desc: 'High-retention vertical financial reel crafted for ICICI Prudential Mutual Fund. Attention-grabbing monetary hook, minimalist kinetic typography, and fast-paced bond liquidity breakdown designed for vertical feeds.',
     videoUrl: 'https://youtube.com/shorts/Z_RnedXcVmU'
   },
+  'icici-upi-fee-reel': {
+    title: "The New UPI Fee for Merchants | Ft. Sharmila D'Silva",
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Hook Crafting, Kinetic Typography & Pacing',
+    desc: 'High-retention vertical financial reel crafted for ICICI Prudential Mutual Fund. Contrarian fintech hook, Apple-grade kinetic typography, and fast-paced interchange fee breakdown.',
+    videoUrl: 'https://youtube.com/shorts/krYRIJBGB7E'
+  },
+  'icici-fii-outflow-reel': {
+    title: "Why Foreign Investors Sold in September | Ft. Sharmila D'Silva",
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Hook Crafting, Kinetic Typography & Pacing',
+    desc: 'High-retention vertical financial reel crafted for ICICI Prudential Mutual Fund. Macroeconomic data hook, dynamic capital flow graphics, and fast-paced institutional selling analysis.',
+    videoUrl: 'https://youtube.com/shorts/xIL25pWqEDM'
+  },
   'podcast-reels': {
     title: 'Mutual Fund Categories to Look for in 2026',
     category: 'Short-Form Reel',
