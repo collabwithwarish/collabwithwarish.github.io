@@ -136,11 +136,33 @@
         </p>
       </div>
 
+      <!-- Apple-Grade Segmented Category Filter Bar -->
+      <div class="filter-wrapper">
+        <div class="filter-container" role="tablist" aria-label="Filter video categories">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">
+            <span>All Stories</span>
+            <span class="filter-count">8</span>
+          </button>
+          <button class="filter-btn" data-filter="documentary" role="tab" aria-selected="false">
+            <span>YouTube Documentaries</span>
+            <span class="filter-count">4</span>
+          </button>
+          <button class="filter-btn" data-filter="podcast" role="tab" aria-selected="false">
+            <span>Podcasts &amp; Mastercuts</span>
+            <span class="filter-count">2</span>
+          </button>
+          <button class="filter-btn" data-filter="reels" role="tab" aria-selected="false">
+            <span>Viral Reels &amp; Shorts</span>
+            <span class="filter-count">2</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Projects Grid -->
       <div class="work-grid">
 
         <!-- Project 1: Flagship YouTube Documentary (Finavenue) -->
-        <article class="work-item" data-category="finance" data-project-id="finavenue-construction" tabindex="0">
+        <article class="work-item" data-category="documentary" data-project-id="finavenue-construction" tabindex="0">
           <div class="work-item__media">
             <img src="assets/projects/finavenue-construction.jpg" alt="The ₹4,700 Cr Market Hiding Behind India's Construction Boom" class="work-item__thumb" loading="lazy">
             <div class="work-item__overlay">
@@ -167,7 +189,7 @@
         </article>
 
         <!-- Project 2: Wealth Management & Family Office Masterclass (Motilal Oswal AMC) -->
-        <article class="work-item" data-category="finance" data-project-id="motilal-family-office" tabindex="0">
+        <article class="work-item" data-category="documentary" data-project-id="motilal-family-office" tabindex="0">
           <div class="work-item__media">
             <img src="assets/projects/motilal-family-office.jpg" alt="3 Things to Avoid When Setting Up a Family Office" class="work-item__thumb" loading="lazy">
             <div class="work-item__overlay">
@@ -194,7 +216,7 @@
         </article>
 
         <!-- Project 3: Macroeconomic Market Analysis (ICICI Prudential Mutual Fund) -->
-        <article class="work-item" data-category="finance" data-project-id="icici-market-analysis" tabindex="0">
+        <article class="work-item" data-category="documentary" data-project-id="icici-market-analysis" tabindex="0">
           <div class="work-item__media">
             <img src="assets/projects/icici-market-analysis.jpg" alt="What Moved Indian Markets? | ICICI Prudential Mutual Fund" class="work-item__thumb" loading="lazy">
             <div class="work-item__overlay">
@@ -221,7 +243,7 @@
         </article>
 
         <!-- Project 4: Debt & Investment Guide (Invesco Mutual Fund) -->
-        <article class="work-item" data-category="finance" data-project-id="invesco-parking-money" tabindex="0">
+        <article class="work-item" data-category="documentary" data-project-id="invesco-parking-money" tabindex="0">
           <div class="work-item__media">
             <img src="assets/projects/invesco-parking-money.jpg" alt="Where Should You Park Money for 6 Months or More? | Invesco Mutual Fund" class="work-item__thumb" loading="lazy">
             <div class="work-item__overlay">
@@ -247,7 +269,7 @@
           </div>
         </article>
 
-        <!-- Project: Viral Podcast Mastercut (Shivohaam & Vrindda) -->
+        <!-- Project 5: Viral Podcast Mastercut (Shivohaam & Vrindda) -->
         <article class="work-item" data-category="podcast" data-project-id="shivohaam-kalki" tabindex="0">
           <div class="work-item__media">
             <img src="assets/projects/shivohaam-kalki.jpg" alt="KALKI आ चुके हैं — 2032 में Satyug शुरू होगा | Shivohaam & Vrindda" class="work-item__thumb" loading="lazy">
@@ -275,8 +297,35 @@
           </div>
         </article>
 
-        <!-- Project 5: Viral Short-Form Reel (Invesco Mutual Fund) -->
-        <article class="work-item" data-category="podcast" data-project-id="invesco-categories-reel" tabindex="0">
+        <!-- Project 6: Capitalmind Podcast Mastercut -->
+        <article class="work-item" data-category="podcast" data-project-id="capitalmind-nri-investing" tabindex="0">
+          <div class="work-item__media">
+            <img src="assets/projects/capitalmind-podcast.jpg" alt="NRI Investing in India? Watch This Before You Move Your Money | Capitalmind" class="work-item__thumb" loading="lazy">
+            <div class="work-item__overlay">
+              <span class="work-item__play" aria-label="Play Video in Website">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
+              </span>
+            </div>
+          </div>
+          <div class="work-item__content">
+            <div class="work-item__meta-top">
+              <div class="work-item__tags">
+                <span class="tag tag--accent">Podcast Mastercut</span>
+                <span class="tag">Capitalmind</span>
+              </div>
+            </div>
+            <h3 class="work-item__title">NRI Investing in India? Watch This Before You Move Your Money</h3>
+            <p class="work-item__desc">
+              High-retention conversational podcast and NRI wealth masterclass edited for Capitalmind. Paced with dynamic multi-camera reaction timing, clean financial graphics, and clear structural narrative.
+            </p>
+            <div class="work-item__footer">
+              <span class="work-item__cta">Watch video story &rarr;</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 7: Viral Short-Form Reel (Invesco Mutual Fund) -->
+        <article class="work-item" data-category="reels" data-project-id="invesco-categories-reel" tabindex="0">
           <div class="work-item__media">
             <img src="assets/projects/invesco-categories-reel.jpg" alt="Mutual Fund Categories to Look for in 2026 | Invesco Mutual Fund" class="work-item__thumb" loading="lazy">
             <div class="work-item__overlay">
@@ -302,8 +351,8 @@
           </div>
         </article>
 
-        <!-- Project 6: Personal Development & Creator Reel (Vrindda Bhatt) -->
-        <article class="work-item" data-category="podcast" data-project-id="vrindda-vision-board" tabindex="0">
+        <!-- Project 8: Personal Development & Creator Reel (Vrindda Bhatt) -->
+        <article class="work-item" data-category="reels" data-project-id="vrindda-vision-board" tabindex="0">
           <div class="work-item__media">
             <img src="assets/projects/vrindda-bhatt-vision-board.jpg" alt="Stop Making Vision Boards | Do This Instead | Vrindda Bhatt" class="work-item__thumb" loading="lazy">
             <div class="work-item__overlay">
@@ -322,33 +371,6 @@
             <h3 class="work-item__title">Stop Making Vision Boards | Do This Instead</h3>
             <p class="work-item__desc">
               High-retention personal development reel crafted for Vrindda Bhatt. Contrarian 3-second hook, minimalist kinetic typography, and rhythmic pacing.
-            </p>
-            <div class="work-item__footer">
-              <span class="work-item__cta">Watch video story &rarr;</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 7: Capitalmind Podcast Mastercut -->
-        <article class="work-item" data-category="podcast" data-project-id="capitalmind-nri-investing" tabindex="0">
-          <div class="work-item__media">
-            <img src="assets/projects/capitalmind-podcast.jpg" alt="NRI Investing in India? Watch This Before You Move Your Money | Capitalmind" class="work-item__thumb" loading="lazy">
-            <div class="work-item__overlay">
-              <span class="work-item__play" aria-label="Play Video in Website">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,4 20,12 6,20"></polygon></svg>
-              </span>
-            </div>
-          </div>
-          <div class="work-item__content">
-            <div class="work-item__meta-top">
-              <div class="work-item__tags">
-                <span class="tag tag--accent">Podcast Mastercut</span>
-                <span class="tag">Capitalmind</span>
-              </div>
-            </div>
-            <h3 class="work-item__title">NRI Investing in India? Watch This Before You Move Your Money</h3>
-            <p class="work-item__desc">
-              High-retention conversational podcast and NRI wealth masterclass edited for Capitalmind. Paced with dynamic multi-camera reaction timing, clean financial graphics, and clear structural narrative.
             </p>
             <div class="work-item__footer">
               <span class="work-item__cta">Watch video story &rarr;</span>
@@ -637,6 +659,6 @@
   </div>
 
   <!-- Main JavaScript Engine -->
-  <script src="js/main.js?v=5.4"></script>
+  <script src="js/main.js?v=5.5"></script>
 </body>
 </html>

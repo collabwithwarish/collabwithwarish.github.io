@@ -901,39 +901,94 @@ img, svg, video {
 /* ==========================================================================
    Apple Segmented Filter Controls
    ========================================================================== */
+.filter-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
 .filter-container {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
   flex-wrap: wrap;
-  margin: 0 auto 48px;
   padding: 6px;
-  background: rgba(241, 245, 249, 0.85);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border-subtle);
+  background: rgba(241, 245, 249, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-sm), var(--glass-highlight);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05), var(--glass-highlight);
 }
 
 .filter-btn {
-  padding: 7px 18px;
-  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
   font-weight: 600;
   border-radius: var(--radius-pill);
   background: transparent;
   color: var(--ink-secondary);
+  border: none;
+  cursor: pointer;
   transition: all var(--transition-fast);
+  white-space: nowrap;
+  user-select: none;
 }
 
 .filter-btn:hover {
   color: var(--ink-primary);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .filter-btn.active {
   background: #ffffff;
-  color: var(--ink-primary);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+  color: var(--blue-primary);
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--ink-secondary);
+  transition: all var(--transition-fast);
+}
+
+.filter-btn.active .filter-count {
+  background: rgba(47, 109, 243, 0.12);
+  color: var(--blue-primary);
+}
+
+@media (max-width: 768px) {
+  .filter-container {
+    gap: 4px;
+    padding: 5px;
+    border-radius: 20px;
+  }
+  .filter-btn {
+    padding: 7px 12px;
+    font-size: 12px;
+    gap: 6px;
+  }
+  .filter-count {
+    min-width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
 }
 
 /* ==========================================================================
