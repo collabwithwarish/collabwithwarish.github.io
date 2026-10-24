@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v6.0';
+  const DATA_VERSION = 'v6.1';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -451,6 +451,24 @@ const projectsData = {
     ],
     image: 'assets/projects/invesco-categories-reel.jpg',
     videoUrl: 'https://youtube.com/shorts/U-Ek8qG2-IY',
+    startTime: 0
+  },
+  'icici-rbi-bond-sale-reel': {
+    title: "The RBI's ₹1 Lakh Crore Bond Sale | Ft. Sharmila D'Silva",
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Hook Crafting, Kinetic Typography & Pacing',
+    desc: 'High-retention vertical financial reel crafted for ICICI Prudential Mutual Fund. Attention-grabbing monetary hook, minimalist kinetic typography, and fast-paced bond liquidity breakdown designed for vertical feeds.',
+    topics: [
+      'Retention-engineered 3-second hook on central bank liquidity and bond auctions',
+      'Minimalist kinetic financial subtitles styled with Apple-grade typography',
+      'Rapid visual pacing breaking down institutional macroeconomics in under 60 seconds',
+      'Punchy audio transitions, sound design, and vocal mastering'
+    ],
+    image: 'assets/projects/icici-rbi-bond-sale-reel.jpg',
+    videoUrl: 'https://youtube.com/shorts/Z_RnedXcVmU',
     startTime: 0
   },
   'podcast-reels': {

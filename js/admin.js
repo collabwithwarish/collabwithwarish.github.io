@@ -132,6 +132,16 @@ const DEFAULT_PROJECTS = {
     desc: 'High-retention vertical financial reel crafted for Invesco Mutual Fund. Retention-engineered 3-second hook, minimalist kinetic typography, and fast-paced asset category breakdown designed for vertical mobile feeds.',
     videoUrl: 'https://youtube.com/shorts/U-Ek8qG2-IY'
   },
+  'icici-rbi-bond-sale-reel': {
+    title: "The RBI's ₹1 Lakh Crore Bond Sale | Ft. Sharmila D'Silva",
+    category: 'Short-Form Reel',
+    year: '2024–2025',
+    tag: 'Short-Form Reel • 9:16',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Hook Crafting, Kinetic Typography & Pacing',
+    desc: 'High-retention vertical financial reel crafted for ICICI Prudential Mutual Fund. Attention-grabbing monetary hook, minimalist kinetic typography, and fast-paced bond liquidity breakdown designed for vertical feeds.',
+    videoUrl: 'https://youtube.com/shorts/Z_RnedXcVmU'
+  },
   'podcast-reels': {
     title: 'Mutual Fund Categories to Look for in 2026',
     category: 'Short-Form Reel',
