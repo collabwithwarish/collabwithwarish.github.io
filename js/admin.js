@@ -53,6 +53,16 @@ const DEFAULT_PROJECTS = {
     desc: 'High-impact macroeconomic documentary and market breakdown edited for ICICI Prudential Mutual Fund. Engineered with institutional data charts, kinetic graphics, and rapid analytical pacing.',
     videoUrl: 'https://www.youtube.com/watch?v=CNPsEUanJvg'
   },
+  'icici-july-markets': {
+    title: "What Moved Indian Markets in July? | Ft. Sharmila D'Silva",
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Macroeconomic Analysis',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Editorial Story Flow, Data Motion Graphics & Audio Mastering',
+    desc: 'Macroeconomic analysis and sector performance breakdown edited for ICICI Prudential Mutual Fund. Institutional data graphics, bond yield tracking, and clear narrative clarity.',
+    videoUrl: 'https://www.youtube.com/watch?v=Kwonirv2Jpg'
+  },
   'invesco-parking-money': {
     title: 'Where to Park Money for 6+ Months?',
     category: 'Podcast Mastercut',

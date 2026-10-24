@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v5.8';
+  const DATA_VERSION = 'v5.9';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -307,6 +307,24 @@ const projectsData = {
     ],
     image: 'assets/projects/icici-nifty-breakdown.jpg',
     videoUrl: 'https://www.youtube.com/watch?v=CNPsEUanJvg',
+    startTime: 0
+  },
+  'icici-july-markets': {
+    title: "What Moved Indian Markets in July? | Ft. Sharmila D'Silva",
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Macroeconomic Analysis',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Editorial Story Flow, Data Motion Graphics & Audio Mastering',
+    desc: 'Macroeconomic analysis and sector performance breakdown edited for ICICI Prudential Mutual Fund. Institutional data graphics, bond yield tracking, and clear narrative clarity.',
+    topics: [
+      'Institutional macroeconomic storytelling and monthly equity catalyst breakdown',
+      'Kinetic financial data charts, sector performance graphs, and bond yield tracking',
+      'Engaging editorial pacing designed for informed long-term retail & HNI investors',
+      'Broadcast-level audio mastering and clean vocal balancing'
+    ],
+    image: 'assets/projects/icici-july-markets.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=Kwonirv2Jpg',
     startTime: 0
   },
   'invesco-parking-money': {
