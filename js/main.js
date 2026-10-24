@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v5.6';
+  const DATA_VERSION = 'v5.7';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -289,6 +289,24 @@ const projectsData = {
     ],
     image: 'assets/projects/icici-market-analysis.jpg',
     videoUrl: 'https://www.youtube.com/watch?v=qr7FplzumYY',
+    startTime: 0
+  },
+  'icici-nifty-breakdown': {
+    title: 'Nifty Fall, FII Out, Insurance Shock - Full Breakdown!',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Macroeconomic Analysis',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Editorial Story Flow, Data Motion Graphics & Audio Mastering',
+    desc: 'High-impact macroeconomic documentary and market breakdown edited for ICICI Prudential Mutual Fund. Engineered with institutional data charts, kinetic graphics, and rapid analytical pacing.',
+    topics: [
+      'Strategic narrative breakdown of Nifty correction and institutional FII capital outflows',
+      'Kinetic financial graphics, regulatory comparison charts, and clean typography',
+      'Fast-paced macroeconomic storytelling keeping long-form viewers engaged',
+      'Broadcast-standard audio balancing and subtle narrative sound design'
+    ],
+    image: 'assets/projects/icici-nifty-breakdown.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=CNPsEUanJvg',
     startTime: 0
   },
   'invesco-parking-money': {

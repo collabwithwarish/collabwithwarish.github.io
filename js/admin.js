@@ -43,6 +43,16 @@ const DEFAULT_PROJECTS = {
     desc: 'A high-retention macroeconomic analysis breakdown edited for ICICI Prudential Mutual Fund. Dynamic pacing, institutional data graphics, and structured storytelling that breaks down complex equity market catalysts for intelligent investors.',
     videoUrl: 'https://www.youtube.com/watch?v=qr7FplzumYY'
   },
+  'icici-nifty-breakdown': {
+    title: 'Nifty Fall, FII Out, Insurance Shock - Full Breakdown!',
+    category: 'YouTube Documentary',
+    year: '2024–2025',
+    tag: 'Macroeconomic Analysis',
+    client: 'ICICI Prudential Mutual Fund',
+    role: 'Editorial Story Flow, Data Motion Graphics & Audio Mastering',
+    desc: 'High-impact macroeconomic documentary and market breakdown edited for ICICI Prudential Mutual Fund. Engineered with institutional data charts, kinetic graphics, and rapid analytical pacing.',
+    videoUrl: 'https://www.youtube.com/watch?v=CNPsEUanJvg'
+  },
   'invesco-parking-money': {
     title: 'Where to Park Money for 6+ Months?',
     category: 'Podcast Mastercut',
