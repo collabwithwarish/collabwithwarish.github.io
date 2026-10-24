@@ -63,6 +63,16 @@ const DEFAULT_PROJECTS = {
     desc: 'Investor education podcast interview and breakdown edited for Invesco Mutual Fund. Simplifying short-term debt allocation, liquid funds, and capital preservation with clear visual comparisons and natural conversational pacing.',
     videoUrl: 'https://www.youtube.com/watch?v=3bduQgeKAAM'
   },
+  'icici-momentum-podcast': {
+    title: 'Why Investors Sell Winners And Keep Losers | Ft. Ms. Manasvi Shah',
+    category: 'Podcast Mastercut',
+    year: '2024–2025',
+    tag: 'Podcast Mastercut • Fund Manager Series',
+    client: 'ICICI Prudential AMC',
+    role: 'Lead Podcast Editor, Reaction Pacing & Behavioral Polish',
+    desc: 'High-retention fund manager interview and behavioral investing podcast edited for ICICI Prudential AMC. Paced with dynamic multi-camera reaction timing, momentum market graphics, and engaging conversational structure.',
+    videoUrl: 'https://www.youtube.com/watch?v=zsVFrRN4idk'
+  },
   'shivohaam-kalki': {
     title: 'KALKI आ चुके हैं — 2032 में Satyug शुरू होगा',
     category: 'Podcast Mastercut',

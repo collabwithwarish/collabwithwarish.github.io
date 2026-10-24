@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v5.7';
+  const DATA_VERSION = 'v5.8';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -325,6 +325,24 @@ const projectsData = {
     ],
     image: 'assets/projects/invesco-parking-money.jpg',
     videoUrl: 'https://www.youtube.com/watch?v=3bduQgeKAAM',
+    startTime: 0
+  },
+  'icici-momentum-podcast': {
+    title: 'Why Investors Sell Winners And Keep Losers | Ft. Ms. Manasvi Shah',
+    category: 'Podcast Mastercut',
+    year: '2024–2025',
+    tag: 'Podcast Mastercut • Fund Manager Series',
+    client: 'ICICI Prudential AMC',
+    role: 'Lead Podcast Editor, Reaction Pacing & Behavioral Polish',
+    desc: 'High-retention fund manager interview and behavioral investing podcast edited for ICICI Prudential AMC. Paced with dynamic multi-camera reaction timing, momentum market graphics, and engaging conversational structure.',
+    topics: [
+      'Multi-camera dialogue timing and natural interview pacing',
+      'Momentum investing framework and behavioral bias data graphics',
+      'Strategic chapter pacing keeping long-form listeners engaged',
+      'Broadcast-level vocal balancing and subtle ambient sound design'
+    ],
+    image: 'assets/projects/icici-momentum-podcast.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=zsVFrRN4idk',
     startTime: 0
   },
   'shivohaam-kalki': {
