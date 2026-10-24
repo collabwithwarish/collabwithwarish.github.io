@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Dynamic Content Hydration (Powered by Admin Panel)
    -------------------------------------------------------------------------- */
 function applyDynamicSettings() {
-  const DATA_VERSION = 'v5.9';
+  const DATA_VERSION = 'v6.0';
   if (localStorage.getItem('warish_data_version') !== DATA_VERSION) {
     localStorage.removeItem('warish_projects');
     localStorage.setItem('warish_data_version', DATA_VERSION);
@@ -327,6 +327,24 @@ const projectsData = {
     videoUrl: 'https://www.youtube.com/watch?v=Kwonirv2Jpg',
     startTime: 0
   },
+  'invesco-smallcap-ai': {
+    title: 'Small-Cap Stocks: Opportunity or Risk?',
+    category: 'AI Videos',
+    year: '2024–2025',
+    tag: 'AI Video Production',
+    client: 'Invesco Mutual Fund',
+    role: 'AI Video Generation, Kinetic Typography & Motion Graphics',
+    desc: 'High-retention AI-driven financial explainer created for Invesco Mutual Fund. Produced using AI visual synthesis, kinetic typography, dynamic scene transitions, and immersive sound design.',
+    topics: [
+      'AI-generated visual storytelling and conceptual stock market scenes',
+      'Kinetic financial typography and data callout animations',
+      'High-retention fast-paced narrative pacing for complex investment topics',
+      'Dynamic sound design, voice mastering, and atmospheric audio layering'
+    ],
+    image: 'assets/projects/invesco-smallcap-ai.jpg',
+    videoUrl: 'https://www.youtube.com/watch?v=wNMMYG9Gr4I',
+    startTime: 0
+  },
   'invesco-parking-money': {
     title: 'Where to Park Money for 6+ Months?',
     category: 'Podcast Mastercut',
@@ -616,7 +634,7 @@ function initPortfolio() {
   // Deep-linking via URL hash (e.g., #documentary, #podcast, #reels)
   function checkHash() {
     const rawHash = window.location.hash.replace('#', '').trim().toLowerCase();
-    const validFilters = ['documentary', 'podcast', 'reels', 'all'];
+    const validFilters = ['documentary', 'podcast', 'reels', 'ai', 'all'];
     if (validFilters.includes(rawHash)) {
       applyFilter(rawHash);
     }

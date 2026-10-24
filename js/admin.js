@@ -63,6 +63,16 @@ const DEFAULT_PROJECTS = {
     desc: 'Macroeconomic analysis and sector performance breakdown edited for ICICI Prudential Mutual Fund. Institutional data graphics, bond yield tracking, and clear narrative clarity.',
     videoUrl: 'https://www.youtube.com/watch?v=Kwonirv2Jpg'
   },
+  'invesco-smallcap-ai': {
+    title: 'Small-Cap Stocks: Opportunity or Risk?',
+    category: 'AI Videos',
+    year: '2024–2025',
+    tag: 'AI Video Production',
+    client: 'Invesco Mutual Fund',
+    role: 'AI Video Generation, Kinetic Typography & Motion Graphics',
+    desc: 'High-retention AI-driven financial explainer created for Invesco Mutual Fund. Produced using AI visual synthesis, kinetic typography, dynamic scene transitions, and immersive sound design.',
+    videoUrl: 'https://www.youtube.com/watch?v=wNMMYG9Gr4I'
+  },
   'invesco-parking-money': {
     title: 'Where to Park Money for 6+ Months?',
     category: 'Podcast Mastercut',
